@@ -1,3 +1,9 @@
+---
+layout: post
+title: Argument validation using attributes
+published: true
+---
+
 # [ [Coding Instinct](http://www.codinginstinct.com/)](http://www.codinginstinct.com/)
 
 "We are survival machines - robot vehicles blindly programmed to preserve the
