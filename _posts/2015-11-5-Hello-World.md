@@ -1,8 +1,9 @@
 ---
 layout: post
-title: "You're up and running!"
+title: Initial post
 published: true
 ---
+
 
 
 Let's try to share my ideas all over the world :)
