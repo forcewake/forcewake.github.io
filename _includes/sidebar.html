@@ -4,9 +4,12 @@
 
 <!-- Toggleable sidebar -->
 <div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>{{ site.description }}</p>
+  </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ site.baseurl }}/">Home</a>
+    <a class="sidebar-nav-item{% if page.url == site.url %} active{% endif %}" href="/">Home</a>
 
     {% comment %}
       The code below dynamically generates a sidebar nav of pages with
@@ -23,12 +26,18 @@
     {% endfor %}
 
   </nav>
-  
+
   <div class="sidebar-item">
-    {% include svg-icons.html %}
-  </div>
- 
-  <div class="sidebar-item">
+    <p>
+      Hi. I'm Pavel Nasovich, Senior Software Developer at EPAM Systems &ndash; though opinions expressed here are my own.
+    </p>
+    <p class="social-icons">
+      <a href="https://github.com/forcewake"><i class="fa fa-github fa-2x"></i></a>
+      <a href="https://bitbucket.org/forcewake"><i class="fa fa-bitbucket fa-2x"></i></a>
+      <a href="https://twitter.com/forcewake"><i class="fa fa-twitter fa-2x"></i></a>
+      <!-- <a href="https://www.linkedin.com/in/forcewake"><i class="fa fa-linkedin fa-2x"></i></a> -->
+      <a href="/feed.xml"><i class="fa fa-rss fa-2x"></i></a>
+    </p>
     <p>
       &copy; {{ site.time | date: '%Y' }}. All rights reserved.
     </p>
