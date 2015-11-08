@@ -10,8 +10,7 @@ comments: true
 I've decide to start writing in my blog..
 And I faced with several issues and strange things in the tools and frameworks.
 
-* TOC
-{:toc}
+{% include _toc.html %}
 
 ## How-to install Sublime Text 3 with Homebrew
 It's pretty easy to install it but for man who is moving from Windows to Mac OS it is rather hard to change mind.
