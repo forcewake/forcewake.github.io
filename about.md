@@ -5,7 +5,7 @@ title: About
 
 Hi. I'm Pavel.
 
-I'm a nerd at heart - a trained computer engineer turned to the software side long ago by the lure of faster feedback. I quickly discovered that I am passionate about building great teams and systems, and I work every day to make the lives of my teammates better and to attain a more holistic understanding of the world around me. As a leader I do my best to inspire my teams and foster a learning culture, with the ultimate goal of delivering high quality products and retaining happy engineers.
+I'm a nerd at heart :)
 
 The internet has accumulated plenty of my fingerprints, some of which you can find in these places:
 
