@@ -1,7 +1,11 @@
 ---
-published: true
+layout: today-i-learned-post
+title: "Today I Learned: Protobuf in Action and replacing switch statements in JS"
+description: "Short article about protobuf and how-to use Objects instead of the switch statement in javascript"
+category: til
+tags: [english, javascript, protobuf]
+comments: true
 ---
-
 
 A short update about several interesting issues that i faced in today
 
