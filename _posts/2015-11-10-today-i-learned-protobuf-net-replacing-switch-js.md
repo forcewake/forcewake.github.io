@@ -12,7 +12,7 @@ A short update about several interesting issues that i faced in today
 {% include _toc.html %}
 
 ## How-to use Protobuf
-You should install (protobuf-net)[https://www.nuget.org/packages/protobuf-net] from nuget and then:
+You should install [protobuf-net](https://www.nuget.org/packages/protobuf-net) from nuget and then:
 
 {% highlight csharp %}
 // Explicit proto contract
@@ -43,7 +43,7 @@ using (var ms = new MemoryStream(serialized))
 }
 {% endhighlight %}
 
-More information about usage, issues and problems in Protobuf you can get from (this article [ru])[http://devoyster.blogspot.com.by/2011/12/protobuf-net.html]
+More information about usage, issues and problems in Protobuf you can get from [this article in Russian](http://devoyster.blogspot.com.by/2011/12/protobuf-net.html)
 
 ## Replacing switch statements with Object
 
