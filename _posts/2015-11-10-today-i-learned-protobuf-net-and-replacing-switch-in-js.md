@@ -2,6 +2,7 @@
 published: false
 ---
 
+
 A short update about several interesting issues that i faced in today
 
 {% include _toc.html %}
@@ -194,4 +195,4 @@ console.log(snack); // 'Drink'
 
 ### Summing up
 
-Object literals are a more natural control of flow in JavaScript, switch is a bit old and clunky and prone to difficult debugging errors. Object’s are more extensible, maintainable, and we can test them a lot better. 
+Object literals are a more natural control of flow in JavaScript, switch is a bit old and clunky and prone to difficult debugging errors. Object’s are more extensible, maintainable, and we can test them a lot better.
