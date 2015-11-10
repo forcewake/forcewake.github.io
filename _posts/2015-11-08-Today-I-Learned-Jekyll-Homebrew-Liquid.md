@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: today-i-learned-post
 title: "Today I Learned: Homebrew, Jekyll and Liquid"
 description: "Short how-to about Homebrew and Sublime Text 3, templates in Liquid and Jekyll bundle"
 category: til
@@ -28,15 +28,15 @@ brew cask install sublime-text3
 ### How do I chain if statements in Jekyll?
 In Jekyll/Liquid else-if is spelt `elsif`, i.e.:
 {% highlight html %}
-{% raw %} 
+{% raw %}
 {% if post.category == "speaking" %}
-  <i class="fa fa-microphone"></i> 
+  <i class="fa fa-microphone"></i>
 {% elsif post.category == "til" %}
   <i class="fa fa-hand-spock-o"></i>
 {% else %}
   <i class="fa fa-hand-paper-o"></i>
 {% endif %}
-{% endraw %} 
+{% endraw %}
 {% endhighlight %}
 
 ### How to use Jekyll code in (inline) code highlighting?
