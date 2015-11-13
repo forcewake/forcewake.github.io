@@ -9,8 +9,6 @@ comments: true
 
 A short update about submodules in git.
 
-{% include _toc.html %}
-
 ## Git submodules
 Let’s start by adding an existing Git repository as a submodule of the repository that we’re working on. To add a new submodule you use the git submodule add command with the absolute or relative URL of the project you would like to start tracking.
 
