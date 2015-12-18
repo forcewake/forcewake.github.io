@@ -39,8 +39,9 @@ public class CurrencyRate
 
 And you need to get information about the `BankBranch`. 
 There are 2 general ways to query the repository:
-* Use a predicate in query
-* Use a `Specification` object that holds predicate.
+
+1. Use a predicate in query
+2. Use a `Specification` object that holds predicate.
 
 The equivalent of the EF Include statements are set in a `Specification` object and called a `FetchStrategy`.
 
