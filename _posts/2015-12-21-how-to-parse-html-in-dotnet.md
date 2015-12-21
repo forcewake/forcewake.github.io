@@ -40,7 +40,7 @@ public class HtmlParser
 }
 {% endhighlight %}
 
-But if you will try to use something more interesting, you will see:
+But when you will try to use something more interesting, you will see something unreadable and hard for understanding:
 
 {% highlight csharp %}
 public class HtmlParser
@@ -60,7 +60,7 @@ public class HtmlParser
 
 ## [Fizzler](https://code.google.com/p/fizzler/)
 
-A .NET library to select items from a node tree based on a CSS selector. The default implementation is based on HTMLAgilityPack and selects from HTML documents. There over 140 unit tests - see below for more information. The tests are based on the jQuery selector engine tests.
+A .NET library to select items from a node tree based on a CSS selector. The default implementation is based on HTMLAgilityPack and selects from HTML documents.
 
 {% highlight csharp %}
 public class HtmlParser
@@ -112,9 +112,9 @@ CSS selectors and jQuery make it really easy to access and manipulate HTML on th
 
 ### Note from the author
 
-CsQuery is not being actively maintained. I no longer use it in my day-to-day work, and indeed don't even work in .NET much these day! Therefore it is difficult for me to spend any time addressing problems or questions. If you post issues, I may not be able to respond to them, and it's very unlikely I will be able to make bug fixes.
-
-While the current release on NuGet (1.3.4) is stable, there are a couple known bugs (see issues) and there are many changes since the last release in the repository. However, I am not going to publish any more official releases, since I don't have time to validate the current code base and address the known issues, or support any unforseen problems that may arise from a new release.
+> CsQuery is not being actively maintained. I no longer use it in my day-to-day work, and indeed don't even work in .NET much these day! Therefore it is difficult for me to spend any time addressing problems or questions. If you post issues, I may not be able to respond to them, and it's very unlikely I will be able to make bug fixes.
+> 
+> While the current release on NuGet (1.3.4) is stable, there are a couple known bugs (see issues) and there are many changes since the last release in the repository. However, I am not going to publish any more official releases, since I don't have time to validate the current code base and address the known issues, or support any unforseen problems that may arise from a new release.
 
 ### Example
 
@@ -185,7 +185,7 @@ public class HtmlParser
 }
 {% endhighlight %}
 
-## Regex
+## [Regex](https://msdn.microsoft.com/en-us/library/system.text.regularexpressions.regex(v=vs.110).aspx)
 
 The worth way of parsing HTML files. Try to avoid using Regex for parsing any HTML like text as Regex is not a tool that can be used to correctly parse HTML.
 But if you want.. I will should a short piece of code with get all links from some HTML string:
