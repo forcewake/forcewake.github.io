@@ -1,6 +1,6 @@
 ---
 layout: today-i-learned-post
-title: "Today I Learned: Using Ninject in OWIN WebApi application"
+title: "Today I Learned: Ninject in OWIN WebApi application"
 description: "Some key point around issues with Ninject in OWIN WebApi application"
 category: til
 tags: [english, dotnet, Ninject, WebApi, nuget]
