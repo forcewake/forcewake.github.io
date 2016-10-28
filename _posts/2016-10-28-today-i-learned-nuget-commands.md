@@ -3,7 +3,7 @@ layout: today-i-learned-post
 title: "Today I Learned: Nuget commands"
 description: "Some key point around issues with Ninject in OWIN WebApi application"
 category: til
-tags: [english, dotnet, Ninject, WebApi, nuget]
+tags: [english, dotnet, nuget]
 comments: true
 ---
 
