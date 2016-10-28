@@ -10,7 +10,7 @@ exclude:
     - CNAME
 
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 permalink: /:title/
 
 author: 'Pavel Nasovich'
