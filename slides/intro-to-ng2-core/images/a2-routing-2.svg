@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="696px" height="523px" viewBox="0 0 696 523" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>a2-routing-2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="696" height="523" rx="18"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="696" height="523" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <rect id="path-3" x="24" y="78" width="653.597656" height="95" rx="18"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="653.597656" height="95" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <rect id="path-5" x="23" y="194" width="653.597656" height="308" rx="18"></rect>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="653.597656" height="308" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+        <rect id="path-7" x="0" y="0" width="306" height="95" rx="18"></rect>
+        <mask id="mask-8" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="306" height="95" fill="white">
+            <use xlink:href="#path-7"></use>
+        </mask>
+        <rect id="path-9" x="0" y="0" width="306" height="95" rx="18"></rect>
+        <mask id="mask-10" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="306" height="95" fill="white">
+            <use xlink:href="#path-9"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="a2-routing-2">
+            <use id="Rectangle" stroke="#4A4A4A" mask="url(#mask-2)" stroke-width="6" fill-opacity="0.2" fill="#D8D8D8" xlink:href="#path-1"></use>
+            <use id="Rectangle" stroke-opacity="0.0653872283" stroke="#4A4A4A" mask="url(#mask-4)" stroke-width="4" fill="#FFF5E4" xlink:href="#path-3"></use>
+            <text id="&lt;trm-contacts-header" font-family="HelveticaNeue-Bold, Helvetica Neue" font-size="14" font-weight="bold" fill="#4A4A4A">
+                <tspan x="35.999" y="105">&lt;trm-contacts-header&gt; </tspan>
+            </text>
+            <text id="&lt;/trm-contacts-heade" font-family="HelveticaNeue-Bold, Helvetica Neue" font-size="14" font-weight="bold" fill="#4A4A4A">
+                <tspan x="33.402" y="153">&lt;/trm-contacts-header&gt; </tspan>
+            </text>
+            <use id="Rectangle" stroke-opacity="0.0653872283" stroke="#4A4A4A" mask="url(#mask-6)" stroke-width="6" fill-opacity="0.2" fill="#B0D5FF" xlink:href="#path-5"></use>
+            <text id="&lt;router-outlet&gt;" font-family="HelveticaNeue-Bold, Helvetica Neue" font-size="14" font-weight="bold" fill="#4A4A4A">
+                <tspan x="39.715" y="221">&lt;router-outlet&gt; </tspan>
+            </text>
+            <text id="&lt;/router-outlet&gt;" font-family="HelveticaNeue-Bold, Helvetica Neue" font-size="14" font-weight="bold" fill="#4A4A4A">
+                <tspan x="47.118" y="482">&lt;/router-outlet&gt; </tspan>
+            </text>
+            <text id="&lt;App&gt;-trm-contacts-a" font-family="HelveticaNeue-Bold, Helvetica Neue" font-size="14" font-weight="bold">
+                <tspan x="311.751" y="33" fill="#9B9B9B">&lt;App&gt;</tspan>
+                <tspan x="355.249" y="33" fill="#000000"></tspan>
+                <tspan x="274.532" y="50" fill="#4A4A4A">trm-contacts-app</tspan>
+            </text>
+            <g id="Group-4" transform="translate(154.000000, 262.000000)">
+                <use id="Rectangle" stroke="#4A4A4A" mask="url(#mask-8)" stroke-width="6" fill="#FFF5E4" xlink:href="#path-7"></use>
+                <text id="trm-contacts-list" font-family="HelveticaNeue-Bold, Helvetica Neue" font-size="14" font-weight="bold">
+                    <tspan x="143.691857" y="32" fill="#9B9B9B"> </tspan>
+                    <tspan x="87.460857" y="49" fill="#4A4A4A">trm-contacts-list</tspan>
+                </text>
+            </g>
+            <g id="Group-4" transform="translate(243.000000, 339.000000)">
+                <use id="Rectangle" stroke="#4A4A4A" mask="url(#mask-10)" stroke-width="6" fill="#FFF5E4" xlink:href="#path-9"></use>
+                <text id="trm-contacts-detail" font-family="HelveticaNeue-Bold, Helvetica Neue" font-size="14" font-weight="bold" fill="#4A4A4A">
+                    <tspan x="78.906857" y="45">trm-contacts-detail</tspan>
+                </text>
+            </g>
+            <text id="or" font-family="HelveticaNeue-Bold, Helvetica Neue" font-size="14" font-weight="bold" fill="#9B9B9B">
+                <tspan x="209.5" y="392">or</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
