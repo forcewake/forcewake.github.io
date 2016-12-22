@@ -9,4 +9,4 @@ comments: true
 
 My slides for presentation: [Intro to Angular2: Core](http://forcewake.me/slides/intro-to-ng2-core/) is based on [thoughtram slides](https://github.com/thoughtram/exploring-ng2-slides) with some changes and updates.
 
-<iframe src="//slides.com/forcewake/ng2-forms/embed" width="576" height="420" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe src="http://forcewake.me/slides/intro-to-ng2-core/" width="576" height="420" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
