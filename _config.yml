@@ -3,7 +3,7 @@ url: 'http://forcewake.me'
 description: 'The Moderately Enthusiastic Programmer'
 
 exclude:
-    - slides
+    - /slides
     - Gemfile
     - Gemfile.lock
     - LICENSE
