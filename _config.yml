@@ -3,6 +3,7 @@ url: 'http://forcewake.me'
 description: 'The Moderately Enthusiastic Programmer'
 
 exclude:
+    - slides/intro-to-ng2-core/plugin/markdown/example.html
     - Gemfile
     - Gemfile.lock
     - LICENSE
