@@ -1,6 +1,6 @@
 ---
 layout: today-i-learned-post
-title: "Today I Learned: SSH connection from macOS 10.12 (Sierra) to a My Cloud"
+title: "Today I Learned: SSH connection from macOS 10.12 to a My Cloud"
 description: "How can you fix SSH connection from macOS 10.12 (Sierra) to a My Cloud"
 category: til
 tags: [english, ssh, macos, mac, Sierra, mycloud]
