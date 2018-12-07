@@ -7,9 +7,7 @@ tags: [english, js, react, jest]
 comments: true
 ---
 
-I know only one way
-
-For anyone who wants a Linq solution, it's:
+I know only one way.
 
 Mock it:
 {% highlight js %}
