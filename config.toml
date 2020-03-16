@@ -1,4 +1,4 @@
-baseURL = "https://forcewake.me/"
+baseURL = "http://forcewake.me/"
 languageCode = "en-us"
 title = "Pavel Nasovich's Blog"
 theme = "ezhil"
