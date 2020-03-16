@@ -1,0 +1,82 @@
+baseURL = "http://forcewake.me"
+languageCode = "en-us"
+title = "Pavel Nasovich's Blog"
+theme = "ezhil"
+paginate = 5
+
+copyright = "© Copyright 2020"
+
+pygmentsstyle = "solarized-dark"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+googleAnalytics = "UA-58396828-2"
+disqusShortname = "forcewake"
+
+summaryLength = 20
+
+[params]
+	subtitle = "The Moderately Enthusiastic Programmer"
+	disableDisqusTypes = ["page"]
+	featherIconsCDN = true
+	favicon = "favicon.ico"
+	mode = "auto" # "dark", "auto", "light"
+	# customCSS = "css/custom.css"  # Custom CSS applied to default styles.
+	# customDarkCSS = "css/custom-dark.css"  # Custom styles applied to dark mode css.
+	# customJS = ["https://code.jquery.com/jquery-3.4.1.js", "js/custom1.js"]  # Custom JS scripts.
+
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "All posts"
+url = "/posts"
+weight = 2
+
+[[menu.main]]
+name = "About"
+url = "/about"
+weight = 3
+
+[[menu.main]]
+name = "Tags"
+url = "/tags"
+weight = 4
+
+[[params.social]]
+name = "Github"
+icon = "github"
+url = "https://github.com/forcewake"
+
+[[params.social]]
+name = "Gitlab"
+icon = "gitlab"
+url = "https://gitlab.com/forcewake"
+
+[[params.social]]
+name = "LinkedIn"
+icon = "linkedin"
+url = "https://www.linkedin.com/in/nasovich/"
+
+[[params.social]]
+name = "Instagram"
+icon = "instagram"
+url = "https://instagram.com/forcewake"
+
+[[params.social]]
+name = "Twitter"
+icon = "twitter"
+url = "https://twitter.com/forcewake"
+
+[[params.social]]
+name = "RSS"
+icon = "rss"
+url = "/index.xml"
+
+[permalinks]
+   posts = "/:title"
+
+[taxonomies]
+   tag = "tags"
