@@ -2,7 +2,7 @@
 categories:
 - music
 comments: true
-date: "2019-06-20T00:00:00Z"
+date: "2020-03-19T00:00:00Z"
 description: How to play Rocksmith 2014 without the Real Tone Cable and use something like Roland Quad-Capture.
 tags:
 - english
