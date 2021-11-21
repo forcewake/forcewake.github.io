@@ -10,7 +10,7 @@ tags:
 - nested virtualization
 - vm
 - docker
-title: 'How to Install MacOS High Sierra as a VM in Unraid with pass through NVIDIA GPU'
+title: 'How to run Docker inside a virtual machine with Windows 10 in Unraid'
 ---
 
 TL;DR Shutdown all VMs than run `modprobe -r kvm_intel` and `modprobe kvm_intel nested=1` in unraid terminal. After that add `<feature policy='require' name='vmx'/>`
