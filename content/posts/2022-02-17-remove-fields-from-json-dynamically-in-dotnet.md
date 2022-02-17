@@ -8,7 +8,7 @@ tags:
 - english
 - dotnet
 - json.net
-- C#
+- csharp
 title: 'How to remove fields from JSON dynamically in dotnet using Json.Net'
 ---
 
