@@ -1,10 +1,10 @@
 baseURL = "https://forcewake.me/"
 languageCode = "en-us"
 title = "Pavel Nasovich's Blog"
-theme = "ezhil"
+theme = "PaperMod"
 paginate = 5
 
-copyright = "© Copyright 2020"
+copyright = "© Copyright 2025"
 
 pygmentsstyle = "solarized-dark"
 pygmentscodefences = true
