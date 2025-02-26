@@ -9,6 +9,7 @@ Params:
   ShowReadingTime: true
 ShowToc: true
 TocOpen: false
+cover:
   image: "overview.png"
   relative: true
 date: "2025-02-26T12:00:00Z"
