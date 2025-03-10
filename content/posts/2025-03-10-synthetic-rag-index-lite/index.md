@@ -24,7 +24,7 @@ tags:
   - OCR
   - best-practices
   - local deployment
-title: "Synthetic RAG Index Lite: Streamlined RAG for Markdown & Images"
+title: "Synthetic RAG Index Lite: Extract and Synthesize"
 ---
 
 ## Why Synthetic RAG Index Lite?
