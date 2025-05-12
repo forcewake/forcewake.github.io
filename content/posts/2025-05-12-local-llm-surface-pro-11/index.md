@@ -6,7 +6,7 @@ categories:
   - Microsoft
   - Surface
 comments: true
-date: "2025-04-03T11:00:00Z" 
+date: "2025-05-12T11:00:00Z" 
 description: >
   This article examines the capabilities of the Microsoft Surface Pro 11 SD X Elite with 32GB RAM for running local Large Language Models (LLMs) using Neural Processing Unit (NPU) acceleration. The analysis focuses on the development experience with ONNX runtime optimization, VSCode AI Toolkit, and specifically the implementation of DeepSeek R1 7B and 14B distilled models. Performance comparisons with Apple's M4 MacBooks reveal significant insights into the current state of on-device AI inference across platforms. The Surface Pro 11, powered by Qualcomm's Snapdragon X Elite processor with a 45 TOPS NPU, represents Microsoft's strategy for enabling AI workloads on edge devices while balancing performance, power efficiency, and developer access to AI acceleration capabilities.
 cover:
