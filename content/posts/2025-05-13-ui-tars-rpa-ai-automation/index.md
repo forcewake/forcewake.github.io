@@ -25,7 +25,6 @@ tags:
 title: "ByteDance's AI breakthrough reshapes how computers are used"
 ---
 
-
 ## How UI-TARS actually works
 
 UI-TARS represents a fundamental departure from traditional GUI automation tools by integrating perception, reasoning, action, and memory into a single end-to-end model. Unlike frameworks that rely on wrapped commercial models with predefined workflows, UI-TARS uses a pure-vision approach that processes screenshots directly.

@@ -6,7 +6,7 @@ categories:
   - AI Platform
   - Generative AI
 comments: true
-date: "2025-04-03T11:00:00Z" 
+date: "2025-04-04T11:00:00Z" 
 description: >
   A  technical and strategic analysis of Azure's AI Gateway capabilities within Azure API Management (APIM). Explores architecture, specialized policies (token limits, semantic caching), deployment via IaC, security best practices, FinOps for cost control, monitoring, and tiered governance for enterprise AI workloads using Azure OpenAI.
 cover:

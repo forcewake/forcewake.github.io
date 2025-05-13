@@ -12,6 +12,9 @@ description: >
 ShowToc: true
 TocOpen: false
 ShowReadingTime: true
+cover:
+  image: "image.png" 
+  relative: true
 tags:
   - LLM Ops
   - Security
