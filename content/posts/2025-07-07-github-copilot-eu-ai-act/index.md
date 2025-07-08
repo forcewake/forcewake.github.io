@@ -8,7 +8,7 @@ Params:
 ShowToc: true
 TocOpen: false
 cover:
-  image: "cover.webp"
+  image: "cover.png"
   relative: true
 date: "2025-07-08T00:00:00Z"
 description: >
