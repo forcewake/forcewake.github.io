@@ -12,7 +12,7 @@ cover:
   relative: true
 date: "2025-07-08T00:00:00Z"
 description: >
-  GitHub Copilot’s new **Agent mode** executes its language-model inference on Azure OpenAI GPUs that sit wholly inside Microsoft’s **EU Data Boundary**—*provided your tenant is in the EU/EFTA **and** the “cross-region capacity” switch stays off*.¹  Prompts, repo context and outputs never leave the EU at rest, though limited pseudonymised telemetry can flow to Microsoft’s global SOC.²  Under the EU AI Act, Copilot is a **general-purpose AI (GPAI)** service; Microsoft/GitHub must supply risk management, transparency notes and system cards, while *you* must keep logs, run a DPIA and enforce human review. Deadlines: GPAI obligations bite **2 Aug 2025**.³  A five-step checklist below locks your setup to the EU and aligns you with the Act.
+  GitHub Copilot’s new Agent mode executes its language-model inference on Azure OpenAI GPUs that sit wholly inside Microsoft’s EU Data Boundary—provided your tenant is in the EU/EFTA and the “cross-region capacity” switch stays off*. Prompts, repo context and outputs never leave the EU at rest, though limited pseudonymised telemetry can flow to Microsoft’s global SOC. Under the EU AI Act, Copilot is a general-purpose AI (GPAI) service; Microsoft/GitHub must supply risk management, transparency notes and system cards, while *you* must keep logs, run a DPIA and enforce human review. Deadlines: GPAI obligations bite 2 Aug 2025. A five-step checklist below locks your setup to the EU and aligns you with the Act.
 tags:
 - Copilot
 - EU
