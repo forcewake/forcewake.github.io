@@ -76,7 +76,7 @@ Second, look at your overall delivery metrics - but give it TIME. Like 3-6 month
 
 Third, consider the cost. At $19-39/month per developer (depending on your plan), you need to see *some* improvement to justify it. Do the napkin math - if a dev saves even 2 hours a month, you're probably breaking even.
 
-## Our Approach (YMMV)
+## My Approach (YMMV)
 
 We ended up with this rough framework:
 
@@ -86,13 +86,13 @@ We ended up with this rough framework:
 - Track basic usage
 - Collect feedback (formal and water cooler chat)
 
-## Phase 2: Expand Carefully
+### Phase 2: Expand Carefully
 
 - Roll out to teams that showed interest
 - Start tracking team-level metrics
 - Watch for any red flags in code quality
 
-## Phase 3: Make a Decision
+### Phase 3: Make a Decision
 
 - Compare metrics, but don't obsess over them
 - Survey everyone - anonymously
