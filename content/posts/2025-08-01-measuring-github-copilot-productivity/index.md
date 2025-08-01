@@ -25,7 +25,6 @@ tags:
 title: "Measuring GitHub Copilot Productivity: What Actually Works (and What Doesn't)"
 ---
 
-## Measuring GitHub Copilot Productivity: What Actually Works (and What Doesn't)
 
 So you're trying to figure out if GitHub Copilot is worth it? Join the club. I've been down this rabbit hole for the past few months, and honestly, it's messier than the vendor slides suggest.
 
