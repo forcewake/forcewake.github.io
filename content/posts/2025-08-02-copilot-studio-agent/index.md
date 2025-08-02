@@ -93,6 +93,8 @@ Reality: We have a hard-coded 10MB limit. No premium accounts. No admin panel fo
 
 But it sounded so *professional*.
 
+![alt text](image.png)
+
 ```mermaid
 graph TD
     A[User asks question] --> B{Is it in the docs?}
