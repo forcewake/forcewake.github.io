@@ -14,7 +14,7 @@ cover:
   relative: true
 date: "2025-08-07T00:00:00Z"
 description: >
-  An architectural analysis of Qwen3-30B-A3B reveals how 128-expert MoE design achieves 91.0 ArenaHard performance with only 3.3B active parameters. This deep technical exploration examines the model's hybrid thinking framework, sophisticated routing mechanisms, and strategic architectural decisions that enable frontier capabilities at 10x parameter efficiency. We dissect the training methodology, quantization resilience, and deployment flexibility that positions this model as a paradigm shift in efficient AI—demonstrating how intelligent design trumps raw scale in the evolving landscape of large language models.
+ An architectural analysis of Qwen3-30B-A3B reveals how 128-expert MoE design achieves 91.0 ArenaHard performance with only 3.3B active parameters. This deep technical exploration examines the model's hybrid thinking framework, sophisticated routing mechanisms, and strategic architectural decisions that enable frontier capabilities at 10x parameter efficiency. We dissect the training methodology, quantization resilience, and deployment flexibility that positions this model as a paradigm shift in efficient AI—demonstrating how intelligent design trumps raw scale in the evolving landscape of large language models.
 tags:
 - Qwen3
 - mixture-of-experts
