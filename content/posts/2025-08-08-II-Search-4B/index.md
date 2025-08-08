@@ -15,7 +15,7 @@ cover:
   relative: true
 date: "2025-08-08T00:00:00Z"
 description: >
-  A comprehensive technical analysis of II-Search-4B reveals how this 4-billion parameter model achieves 91.8% SimpleQA accuracy through specialized web search capabilities, outperforming base models by 256% on multi-hop reasoning tasks. This deep dive explores the four-phase training methodology combining 235B-parameter knowledge distillation, STORM-enhanced rejection sampling, and outcome-supervised reinforcement learning. We dissect the practical deployment strategies from 8-GPU tensor parallelism to single-GPU quantization and Apple Silicon optimization, demonstrating how focused specialization enables frontier search performance at 1/50th the parameter count of comparable general-purpose models—proving that intelligent constraints and targeted training trump raw scale in the evolving landscape of AI agents.
+  A technical analysis of II-Search-4B reveals how this 4-billion parameter model achieves 91.8% SimpleQA accuracy through specialized web search capabilities, outperforming base models by 256% on multi-hop reasoning tasks. We dissect the practical deployment strategies from 8-GPU tensor parallelism to single-GPU quantization and Apple Silicon optimization, demonstrating how focused specialization enables frontier search performance at 1/50th the parameter count of comparable general-purpose models—proving that intelligent constraints and targeted training trump raw scale in the evolving landscape of AI agents.
 tags:
 - II-Search-4B
 - web-search-ai
