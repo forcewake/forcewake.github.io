@@ -22,7 +22,7 @@ tags:
 - devops
 - production-ai
 title: "Azure AI Foundry: Building Multi-Agent Systems Without Losing Your Mind (Much)"
-date: "2025-01-15T00:00:00Z"
+date: "2025-08-27T00:00:00Z"
 comments: true
 Params:
   ShowReadingTime: true
@@ -31,8 +31,6 @@ Params:
 cover:
   image: "cover.png"
   relative: true
-author: "Your Name"
-draft: false
 ---
 
 Hey folks! So, picture this: it's 3 AM, I'm staring at my fourth attempt to orchestrate multiple AI agents, and my code looks like someone tried to solve the traveling salesman problem with spaghetti. The agents are talking to each other... sometimes. When they feel like it. When Mercury is in retrograde.
