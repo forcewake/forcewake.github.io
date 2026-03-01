@@ -10,7 +10,7 @@ Params:
   ShowReadingTime: true
   ShowToc: true
   TocOpen: true
-date: "2026-03-01T00:00:00Z"
+date: "2026-02-28T00:00:00Z"
 cover:
   image: "cover.png"
   relative: true
