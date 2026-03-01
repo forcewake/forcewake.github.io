@@ -1,0 +1,245 @@
+{
+  "title": "Engineering Flashcards",
+  "cards": [
+    {
+      "front": "In 2026, the primary focus of software engineers shifts from writing code to what activities?",
+      "back": "Orchestrating agents, evaluating output, and providing strategic direction."
+    },
+    {
+      "front": "How does agentic AI impact the traditional software development lifecycle (SDLC) cycle time?",
+      "back": "It collapses cycle time from weeks to hours."
+    },
+    {
+      "front": "What is the expected reduction in onboarding time for new codebases in 2026?",
+      "back": "From weeks to hours."
+    },
+    {
+      "front": "Term: Surge staffing",
+      "back": "Definition: Dynamically shifting engineers on-demand onto tasks requiring deep codebase knowledge."
+    },
+    {
+      "front": "How do multi-agent architectures differ from single-agent workflows regarding processing?",
+      "back": "They use parallel reasoning across separate context windows rather than sequential processing."
+    },
+    {
+      "front": "What role does an 'orchestrator' play in a multi-agent system?",
+      "back": "It coordinates specialised agents and synthesises their results into integrated output."
+    },
+    {
+      "front": "By 2026, what is the anticipated duration for which agents can work autonomously on applications?",
+      "back": "Days or weeks."
+    },
+    {
+      "front": "How do long-running agents address the issue of technical debt?",
+      "back": "They systematically eliminate it by working through backlogs that humans lacked time to address."
+    },
+    {
+      "front": "What is the 'collaboration paradox' identified in engineering research?",
+      "back": "Engineers use AI in roughly $60\\%$ of work but can only fully delegate a small fraction of tasks."
+    },
+    {
+      "front": "What type of tasks are engineers most likely to delegate to AI agents?",
+      "back": "Tasks that are low-stakes or easily verifiable."
+    },
+    {
+      "front": "How does human oversight scale to handle large-scale AI-generated code in 2026?",
+      "back": "By using AI agents to review code for security, quality, and architectural consistency."
+    },
+    {
+      "front": "The shift in human oversight is from reviewing everything to reviewing _____.",
+      "back": "What matters most."
+    },
+    {
+      "front": "Which two specific legacy languages are highlighted as gaining support through agentic coding?",
+      "back": "COBOL and Fortran."
+    },
+    {
+      "front": "What does it mean for the barrier between 'people who code' and 'people who don't' to become permeable?",
+      "back": "Non-engineers can use code to solve problems through AI tools."
+    },
+    {
+      "front": "How does agentic coding affect the 'full-stack' capabilities of engineers?",
+      "back": "It allows them to work across unfamiliar domains like infrastructure or databases by filling knowledge gaps."
+    },
+    {
+      "front": "What are the three multipliers driving software development acceleration in 2026?",
+      "back": "Agent capabilities, orchestration improvements, and human experience."
+    },
+    {
+      "front": "How does total cost of ownership change for organisations using agentic coding?",
+      "back": "It decreases as agents augment engineer capacity and shorten timelines."
+    },
+    {
+      "front": "What is the primary driver of increased productivity in AI-assisted engineering?",
+      "back": "Increased output volume rather than simply doing tasks faster."
+    },
+    {
+      "front": "Approximately what percentage of AI-assisted work consists of tasks that would not have been done otherwise?",
+      "back": "$27\\%$."
+    },
+    {
+      "front": "Term: Papercuts",
+      "back": "Definition: Minor issues that improve quality of life but are typically deprioritised in manual development."
+    },
+    {
+      "front": "What is the benefit of domain experts implementing solutions directly with agents?",
+      "back": "It removes the bottleneck of waiting for traditional engineering teams."
+    },
+    {
+      "front": "How does agentic coding democratise security expertise?",
+      "back": "It enables any engineer to perform in-depth security reviews and hardening."
+    },
+    {
+      "front": "What is the 'dual-use' risk of agentic coding in security?",
+      "back": "The same capabilities that help defenders also allow threat actors to scale offensive attacks."
+    },
+    {
+      "front": "Term: Agentic cyber defence systems",
+      "back": "Definition: Automated systems that detect and respond to threats at machine speed."
+    },
+    {
+      "front": "Where should security architecture be embedded according to 2026 priorities?",
+      "back": "As a part of agentic system design from the earliest stages."
+    },
+    {
+      "front": "What is the top priority for organisations to handle development complexity that single agents cannot?",
+      "back": "Mastering multi-agent coordination."
+    },
+    {
+      "front": "The central theme of 2026 software development is shifting from writing code to _____.",
+      "back": "Orchestrating agents that write code."
+    },
+    {
+      "front": "What was the numerical accuracy achieved by Claude Code in Rakuten's activation vector implementation?",
+      "back": "$99.9\\%$."
+    },
+    {
+      "front": "How long did it take Claude Code to complete the Rakuten technical implementation task?",
+      "back": "Seven hours."
+    },
+    {
+      "front": "How many hours has TELUS saved through AI interactions?",
+      "back": "Over 500,000 hours."
+    },
+    {
+      "front": "What is the average time saved per AI interaction at TELUS?",
+      "back": "40 minutes."
+    },
+    {
+      "front": "By what factor did Claude-powered systems increase execution speed at the fintech platform CRED?",
+      "back": "It doubled execution speed."
+    },
+    {
+      "front": "What level of AI adoption did Zapier achieve across its entire organisation?",
+      "back": "$89\\%$."
+    },
+    {
+      "front": "How did Anthropic's legal team use Claude Code to improve their workflow?",
+      "back": "They built self-service tools to triage issues before they reached the legal queue."
+    },
+    {
+      "front": "By how much did Anthropic's legal team reduce marketing review turnaround times?",
+      "back": "From two to three days down to 24 hours."
+    },
+    {
+      "front": "What tool is mentioned as being designed for non-developers to automate task management?",
+      "back": "Cowork."
+    },
+    {
+      "front": "Single-agent workflows process tasks _____ through one context window.",
+      "back": "Sequentially."
+    },
+    {
+      "front": "How did Fountain use Claude to staff a fulfillment centre in less than 72 hours?",
+      "back": "Through hierarchical multi-agent orchestration for screening and document generation."
+    },
+    {
+      "front": "In 2026, building software means orchestrating agents, evaluating output, and ensuring the system solves _____.",
+      "back": "The right problems correctly."
+    },
+    {
+      "front": "Why is 'taste' still considered a human-centric requirement in software design?",
+      "back": "It requires organisational context and high-level design judgment that AI lacks."
+    },
+    {
+      "front": "What is the result of 'timeline compression' in software projects?",
+      "back": "Previously unviable projects become feasible, enabling faster responses to market opportunities."
+    },
+    {
+      "front": "In Trend 7, what is the impact of domain experts implementing solutions themselves?",
+      "back": "Productivity gains extend across the entire organisation."
+    },
+    {
+      "front": "How do design teams at Zapier use Claude artifacts?",
+      "back": "To rapidly prototype design concepts in real-time during customer interviews."
+    },
+    {
+      "front": "What is the key difference between treating AI as an incremental tool versus a strategic priority?",
+      "back": "Strategic adopters define what is possible, while incremental users compete by old rules."
+    },
+    {
+      "front": "How does agentic coding assist research teams who lack development expertise?",
+      "back": "It enables them to build frontend visualisations of their data."
+    },
+    {
+      "front": "What specific challenge did Augment Code address for an enterprise customer using Claude?",
+      "back": "It reduced a projected 4 to 8-month project to just two weeks."
+    },
+    {
+      "front": "What are the four demand areas for immediate attention in 2026 priorities?",
+      "back": "Multi-agent coordination, human-agent oversight, extending beyond engineering, and embedding security."
+    },
+    {
+      "front": "In the evolution of programming, what preceded agentic AI as the most recent abstraction layer?",
+      "back": "Human/machine conversation."
+    },
+    {
+      "front": "What is the primary goal of keeping humans 'in the loop' in 2026?",
+      "back": "To make human expertise count where it matters most."
+    },
+    {
+      "front": "How many specialized agents did Fountain's Copilot coordinate?",
+      "back": "Multiple sub-agents for screening, document generation, and sentiment analysis."
+    },
+    {
+      "front": "What impact does agentic coding have on 'papercuts' in software development?",
+      "back": "It makes addressing minor quality issues feasible because of reduced manual effort."
+    },
+    {
+      "front": "According to the report, what determines the success of AI collaboration?",
+      "back": "Active human participation, supervision, and validation."
+    },
+    {
+      "front": "What is the 'paradox' of automation mentioned in Trend 4?",
+      "back": "Effective AI collaboration requires active human participation rather than total removal."
+    },
+    {
+      "front": "Which organisation used Claude artifacts to prototype concepts that normally take weeks in just days?",
+      "back": "Zapier."
+    },
+    {
+      "front": "How does agentic coding influence the 'economics of software development' regarding backlogs?",
+      "back": "Long-running agents can systematically eliminate years of accumulated technical debt."
+    },
+    {
+      "front": "In 2026, engineers describe using AI primarily for tasks where they know what _____.",
+      "back": "The answer should be or should look like."
+    },
+    {
+      "front": "What defines the 'tectonic shift' in Trend 1?",
+      "back": "The systemic reconfiguration of the SDLC and software engineering roles."
+    },
+    {
+      "front": "How many custom AI solutions were created by teams at TELUS?",
+      "back": "Over 13,000 solutions."
+    },
+    {
+      "front": "What is the function of 'automated agentic systems' in machine-speed security?",
+      "back": "Automating detection and response to match autonomous threats."
+    },
+    {
+      "front": "The value of an engineer's contribution in 2026 shifts to what specific area?",
+      "back": "System architecture design and quality evaluation."
+    }
+  ]
+}

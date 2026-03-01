@@ -1,0 +1,265 @@
+{
+  "title": "Coding Quiz",
+  "questions": [
+    {
+      "question": "According to the 2026 Agentic Coding Trends Report, how is the traditional timeline for onboarding to a new codebase expected to change?",
+      "answerOptions": [
+        {
+          "text": "It will expand from days to weeks due to the complexity of multi-agent systems.",
+          "isCorrect": false,
+          "rationale": "This contradicts the report's prediction that agents will simplify the understanding of complex systems, not make them harder to join."
+        },
+        {
+          "text": "It will remain stable at roughly two weeks as human oversight requirements persist.",
+          "isCorrect": false,
+          "rationale": "While human oversight remains, the report specifically predicts a massive collapse in the time required for the initial onboarding phase."
+        },
+        {
+          "text": "It will collapse from weeks to hours, enabling dynamic project staffing.",
+          "isCorrect": true,
+          "rationale": "The report highlights that agentic tools allow engineers to understand and contribute to new projects almost immediately."
+        },
+        {
+          "text": "It will be eliminated entirely as agents will handle all codebase transitions autonomously.",
+          "isCorrect": false,
+          "rationale": "The report stresses that the process is collaborative and still involves human engineers, rather than being fully automated away."
+        }
+      ],
+      "hint": "Consider the impact of 'surge staffing' mentioned in the foundation trends."
+    },
+    {
+      "question": "Which of the following best describes the shifting role of a software engineer in $2026$ as described in the report?",
+      "answerOptions": [
+        {
+          "text": "Transitioning from a system architect to a primary code implementer.",
+          "isCorrect": false,
+          "rationale": "This is the opposite of the predicted trend, which sees implementation moving toward AI agents."
+        },
+        {
+          "text": "Evolving from a code writer to an orchestrator of agentic systems.",
+          "isCorrect": true,
+          "rationale": "The value of an engineer is shifting toward high-level strategy, architecture, and the management of AI agents that perform the tactical coding."
+        },
+        {
+          "text": "Focusing exclusively on manual debugging to ensure agentic output is safe.",
+          "isCorrect": false,
+          "rationale": "While debugging remains part of the process, the report indicates that agents will handle much of the debugging as well."
+        },
+        {
+          "text": "Moving toward specialised 'siloed' roles to manage increasing system complexity.",
+          "isCorrect": false,
+          "rationale": "The report actually suggests engineers are becoming more 'full-stack' as AI fills in knowledge gaps across different domains."
+        }
+      ],
+      "hint": "Think about the transition from 'writing' to 'directing' the development process."
+    },
+    {
+      "question": "What is the primary technical advantage of a multi-agent architecture over a single-agent workflow?",
+      "answerOptions": [
+        {
+          "text": "It reduces the total number of context windows required for a project.",
+          "isCorrect": false,
+          "rationale": "Multi-agent systems actually use multiple context windows to handle parallel reasoning and task specialisation."
+        },
+        {
+          "text": "It ensures that only one agent has access to the codebase at any given time.",
+          "isCorrect": false,
+          "rationale": "One of the key benefits is the ability for multiple agents to contribute simultaneously to a project."
+        },
+        {
+          "text": "It enables parallel reasoning across separate context windows for complex tasks.",
+          "isCorrect": true,
+          "rationale": "Coordinated teams of agents can specialise in different areas and work concurrently, which sequential single agents cannot do effectively."
+        },
+        {
+          "text": "It removes the need for human task decomposition and supervision.",
+          "isCorrect": false,
+          "rationale": "The report explicitly states that multi-agent systems require new human skills in task decomposition and coordination."
+        }
+      ],
+      "hint": "Focus on how multiple agents interact with their respective environments compared to a single sequential process."
+    },
+    {
+      "question": "Research from Anthropic's Societal Impacts team found that while engineers use AI in roughly $60\\%$ of their work, they can 'fully delegate' what percentage of their tasks?",
+      "answerOptions": [
+        {
+          "text": "$0-20\\%$",
+          "isCorrect": true,
+          "rationale": "This low figure highlights the 'collaboration paradox,' where high usage still requires significant human oversight and judgment."
+        },
+        {
+          "text": "$40-50\\%$",
+          "isCorrect": false,
+          "rationale": "This overestimates the current level of full autonomy reported by engineers, who still find high-stakes work requires active supervision."
+        },
+        {
+          "text": "$60-80\\%$",
+          "isCorrect": false,
+          "rationale": "This range confuses the total percentage of work where AI is used with the much lower percentage where it can be fully left alone."
+        },
+        {
+          "text": "Nearly $100\\%$",
+          "isCorrect": false,
+          "rationale": "The report emphasizes that the role of the human remains central and is not being replaced by total delegation."
+        }
+      ],
+      "hint": "This statistic explains why the process is described as highly collaborative rather than fully automated."
+    },
+    {
+      "question": "Which types of tasks are engineers currently most likely to delegate to AI agents?",
+      "answerOptions": [
+        {
+          "text": "High-level architectural design and strategic planning.",
+          "isCorrect": false,
+          "rationale": "These tasks require 'taste' and organisational context, which engineers typically keep for themselves."
+        },
+        {
+          "text": "Tasks that are easily verifiable or 'low-stakes' scripts.",
+          "isCorrect": true,
+          "rationale": "Engineers prefer delegating work where they can quickly 'sniff-check' the correctness of the output."
+        },
+        {
+          "text": "Complex security hardening of financial infrastructure.",
+          "isCorrect": false,
+          "rationale": "While AI assists in security, high-stakes tasks generally involve more collaborative work rather than full delegation."
+        },
+        {
+          "text": "Tasks involving high levels of conceptual difficulty and design dependence.",
+          "isCorrect": false,
+          "rationale": "The more conceptually difficult a task is, the more likely an engineer is to work through it personally or collaboratively."
+        }
+      ],
+      "hint": "Think about the ability to 'sniff-check' the results for correctness."
+    },
+    {
+      "question": "The report mentions that agentic coding is expanding to legacy languages. Which specific examples are provided?",
+      "answerOptions": [
+        {
+          "text": "COBOL and Fortran",
+          "isCorrect": true,
+          "rationale": "The report predicts that support for these less-common and legacy languages will remove adoption barriers for specialised use cases."
+        },
+        {
+          "text": "Python and Java",
+          "isCorrect": false,
+          "rationale": "These are modern, mainstream languages that were the focus of the earliest wave of AI tools."
+        },
+        {
+          "text": "Swift and Kotlin",
+          "isCorrect": false,
+          "rationale": "These are modern mobile development languages, not the legacy 'COBOL-era' systems mentioned in the expansion trend."
+        },
+        {
+          "text": "Rust and Go",
+          "isCorrect": false,
+          "rationale": "While specialised, these are modern systems languages rather than the legacy examples cited in the report."
+        }
+      ],
+      "hint": "Look for languages that were common in early mainframe and scientific computing."
+    },
+    {
+      "question": "What interesting productivity pattern did internal research at Anthropic reveal regarding AI-assisted engineering?",
+      "answerOptions": [
+        {
+          "text": "A net increase in time spent per task but a decrease in bugs.",
+          "isCorrect": false,
+          "rationale": "The research actually found that time spent per task category decreased."
+        },
+        {
+          "text": "Productivity gains are driven by speed rather than output volume.",
+          "isCorrect": false,
+          "rationale": "The report suggests the opposite: that volume (more features, more fixes) is the primary driver of productivity."
+        },
+        {
+          "text": "A net decrease in time per task but a much larger increase in output volume.",
+          "isCorrect": true,
+          "rationale": "AI allows engineers to ship more features and fix more issues, rather than just doing a fixed amount of work faster."
+        },
+        {
+          "text": "Productivity gains only occur in non-technical departments.",
+          "isCorrect": false,
+          "rationale": "Engineering teams reported significant gains, such as the $30\\%$ faster shipping speed at TELUS."
+        }
+      ],
+      "hint": "Consider the difference between doing one task faster and being able to complete many more tasks in the same timeframe."
+    },
+    {
+      "question": "In the context of the report, what does the term 'papercuts' refer to?",
+      "answerOptions": [
+        {
+          "text": "Critical security vulnerabilities that require immediate human intervention.",
+          "isCorrect": false,
+          "rationale": "Papercuts are specifically described as minor issues, not critical high-priority vulnerabilities."
+        },
+        {
+          "text": "Minor issues that improve quality of life but are typically deprioritised.",
+          "isCorrect": true,
+          "rationale": "AI makes addressing these small nuisances feasible because it reduces the cost and time required to fix them."
+        },
+        {
+          "text": "Physical injuries sustained by engineers during hardware maintenance.",
+          "isCorrect": false,
+          "rationale": "This is a literal interpretation of the term, whereas the report uses it as a metaphor for software development tasks."
+        },
+        {
+          "text": "The cost of licensing AI agents for non-technical staff.",
+          "isCorrect": false,
+          "rationale": "The report links 'papercuts' to task prioritisation and output volume, not financial licensing costs."
+        }
+      ],
+      "hint": "These are the types of 'nice-to-have' fixes that usually get ignored in a busy development cycle."
+    },
+    {
+      "question": "According to the report, how did the legal team at Anthropic use Claude Code to improve their workflow?",
+      "answerOptions": [
+        {
+          "text": "They used it to replace all human attorneys in the marketing review process.",
+          "isCorrect": false,
+          "rationale": "The agents act as collaborators to triage and automate tasks, but they do not replace the need for strategic legal counsel."
+        },
+        {
+          "text": "They built self-service tools that triage issues before they reach the legal queue.",
+          "isCorrect": true,
+          "rationale": "This allows lawyers to focus on strategic work rather than tactical busywork like contract redlining."
+        },
+        {
+          "text": "They used it to write new legislation for AI regulation.",
+          "isCorrect": false,
+          "rationale": "The case study focuses on internal business process improvements like marketing reviews and contract triage."
+        },
+        {
+          "text": "They automated the hiring of new legal staff to handle increased volume.",
+          "isCorrect": false,
+          "rationale": "The focus was on making the existing team more efficient by reducing turnaround times for reviews."
+        }
+      ],
+      "hint": "Focus on how the lawyers reduced their role as a bottleneck for repetitive requests."
+    },
+    {
+      "question": "Trend $8$ discusses the 'dual-use' nature of agentic coding in security. What does this imply?",
+      "answerOptions": [
+        {
+          "text": "Agents can only be used for defensive security hardening.",
+          "isCorrect": false,
+          "rationale": "The report warns that the same powerful capabilities available to defenders are also available to attackers."
+        },
+        {
+          "text": "Agentic tools require two humans to monitor every security check.",
+          "isCorrect": false,
+          "rationale": "Dual-use refers to the applications of the technology (offensive vs. defensive), not the number of human operators."
+        },
+        {
+          "text": "The same capabilities that aid security defenders also help attackers scale their efforts.",
+          "isCorrect": true,
+          "rationale": "As security knowledge is democratised for engineers, threat actors can also leverage agents to automate and scale attacks."
+        },
+        {
+          "text": "Security agents must be written in two different programming languages for redundancy.",
+          "isCorrect": false,
+          "rationale": "The term 'dual-use' is a common policy term referring to technology that has both helpful and harmful applications."
+        }
+      ],
+      "hint": "Think about how powerful tools can be used by both 'good' and 'bad' actors."
+    }
+  ]
+}

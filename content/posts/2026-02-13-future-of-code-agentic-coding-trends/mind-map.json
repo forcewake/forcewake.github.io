@@ -1,0 +1,140 @@
+{
+  "name": "2026 Agentic Coding Trends",
+  "children": [
+    {
+      "name": "Foundation Trends",
+      "children": [
+        {
+          "name": "SDLC Transformation",
+          "children": [
+            {
+              "name": "Cycle time collapses from weeks to hours"
+            },
+            {
+              "name": "Shift from writing code to orchestration"
+            },
+            {
+              "name": "Rapid onboarding and dynamic staffing"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Capability Trends",
+      "children": [
+        {
+          "name": "Multi-Agent Coordination",
+          "children": [
+            {
+              "name": "Parallel reasoning architectures"
+            },
+            {
+              "name": "Specialized sub-agent teams"
+            }
+          ]
+        },
+        {
+          "name": "Long-Running Agents",
+          "children": [
+            {
+              "name": "Task horizons extending to days/weeks"
+            },
+            {
+              "name": "Building entire applications autonomously"
+            },
+            {
+              "name": "Systematic elimination of technical debt"
+            }
+          ]
+        },
+        {
+          "name": "Intelligent Collaboration",
+          "children": [
+            {
+              "name": "Agents learn when to ask for help"
+            },
+            {
+              "name": "AI-led quality control and security reviews"
+            },
+            {
+              "name": "Human focus on high-value strategic work"
+            }
+          ]
+        },
+        {
+          "name": "Expanded Surfaces",
+          "children": [
+            {
+              "name": "Support for legacy languages like COBOL"
+            },
+            {
+              "name": "Democratisation for non-traditional devs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Impact Trends",
+      "children": [
+        {
+          "name": "Development Economics",
+          "children": [
+            {
+              "name": "Increased output volume over speed"
+            },
+            {
+              "name": "Feasibility of previously unviable projects"
+            },
+            {
+              "name": "Reduced total cost of ownership"
+            }
+          ]
+        },
+        {
+          "name": "Non-Technical Expansion",
+          "children": [
+            {
+              "name": "Self-service tools for business teams"
+            },
+            {
+              "name": "Automating repetitive functional tasks"
+            }
+          ]
+        },
+        {
+          "name": "Security Dynamics",
+          "children": [
+            {
+              "name": "Democratised security expertise"
+            },
+            {
+              "name": "Rise of automated cyber defense"
+            },
+            {
+              "name": "Dual-use risk from scaled attacks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Strategic Priorities",
+      "children": [
+        {
+          "name": "Mastering multi-agent complexity"
+        },
+        {
+          "name": "Scaling human-agent oversight"
+        },
+        {
+          "name": "Empowering domain experts"
+        },
+        {
+          "name": "Embedding security-first architecture"
+        }
+      ]
+    }
+  ]
+}
