@@ -1,3 +1,3 @@
-Sitemap: http://forcewake.me/sitemap.xml
+Sitemap: https://forcewake.me/sitemap.xml
 User-agent: *
 Allow: /

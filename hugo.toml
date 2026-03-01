@@ -1,0 +1,143 @@
+baseURL = "https://forcewake.me/"
+languageCode = "en-us"
+title = "Pavel Nasovich's Blog"
+theme = "PaperMod"
+
+# Dynamic copyright year
+copyright = "© Copyright {{ now.Year }}"
+
+[pagination]
+  disableAliases = false
+  pagerSize = 10
+  path = 'page'
+
+# Modern syntax highlighting configuration (replaces deprecated pygments* settings)
+[markup]
+  [markup.highlight]
+    style = "solarized-dark"
+    codeFences = true
+    guessSyntax = true
+    lineNos = false
+    noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    endLevel = 4
+    ordered = false
+    startLevel = 2
+
+# Google Analytics 4
+[services]
+  [services.googleAnalytics]
+    ID = "G-ZVSNRF6B0E"
+
+summaryLength = 20
+
+[params]
+  subtitle = "The Moderately Enthusiastic Programmer"
+  featherIconsCDN = true
+  favicon = "/favicon.ico"
+  mode = "auto" # "dark", "auto", "light"
+
+  # Author info (used by theme for RSS, etc.)
+  [params.author]
+    name = "Pavel Nasovich"
+    email = ""
+    link = "https://forcewake.me/"
+
+  # Giscus comments (GitHub Discussions-based, privacy-friendly)
+  [params.giscus]
+    enabled = true
+    repo = "forcewake/forcewake.github.io"
+    repoId = "MDEwOlJlcG9zaXRvcnk5MzkxMDA2"
+    category = "General"
+    categoryId = "DIC_kwDOAI9Lns4C3dsT"
+    mapping = "pathname"
+    strict = "0"
+    reactionsEnabled = "1"
+    emitMetadata = "1"
+    inputPosition = "top"
+    theme = "preferred_color_scheme"
+    lang = "en"
+    loading = "lazy"
+
+# Image optimization settings (Hugo 0.140+)
+[imaging]
+  quality = 85
+  resampleFilter = "lanczos"
+  [imaging.exif]
+    disableDate = true
+    disableLatLong = true
+
+# Sitemap configuration
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+# Security settings
+[security]
+  [security.funcs]
+    getenv = ["^HUGO_", "^CI$"]
+
+# Menu configuration
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "All posts"
+  url = "/posts"
+  weight = 2
+
+[[menu.main]]
+  name = "About"
+  url = "/about"
+  weight = 3
+
+[[menu.main]]
+  name = "Tags"
+  url = "/tags"
+  weight = 4
+
+# Social links
+[[params.social]]
+  name = "Github"
+  icon = "github"
+  url = "https://github.com/forcewake"
+
+[[params.social]]
+  name = "Gitlab"
+  icon = "gitlab"
+  url = "https://gitlab.com/forcewake"
+
+[[params.social]]
+  name = "LinkedIn"
+  icon = "linkedin"
+  url = "https://www.linkedin.com/in/nasovich/"
+
+[[params.social]]
+  name = "Instagram"
+  icon = "instagram"
+  url = "https://instagram.com/forcewake"
+
+[[params.social]]
+  name = "Twitter"
+  icon = "twitter"
+  url = "https://twitter.com/forcewake"
+
+[[params.social]]
+  name = "RSS"
+  icon = "rss"
+  url = "/index.xml"
+
+# Permalinks
+[permalinks]
+  posts = "/:title"
+
+# Taxonomies
+[taxonomies]
+  tag = "tags"
+  category = "categories"
