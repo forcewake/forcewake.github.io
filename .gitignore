@@ -1,2 +1,33 @@
+# Hugo build output
 public/
+resources/
+
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+.venv/
+venv/
+
+# Hugo build lock
+.hugo_build.lock
+
+# Node modules (if using npm/yarn for themes)
+node_modules/
+
+# Qwen
+.qwen/
