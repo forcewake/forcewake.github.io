@@ -2,7 +2,7 @@
 title: "Microsoft Agent Framework in 2026: Enterprise Architecture Playbook"
 date: "2026-02-23T00:00:00Z"
 description: >
-  Detailed, source-grounded guide to adopting Microsoft Agent Framework in 2026: architecture model, orchestration patterns, memory and durability, observability, security posture, framework trade-offs, and a 90-day rollout plan.
+  Deep technical guide to adopting Microsoft Agent Framework in 2026 with architecture decisions, production anti-patterns, and concrete .NET/Python code for agents, middleware, observability, HITL approvals, orchestration, and checkpointing.
 categories:
 - artificial-intelligence
 - software-engineering
@@ -29,161 +29,390 @@ Params:
 
 ## Executive Summary
 
-The big story of early 2026 is not just "better models". It is platform consolidation plus operational maturity for agent systems. Microsoft Agent Framework (MAF) is positioned as the convergence point of AutoGen-style multi-agent orchestration and Semantic Kernel-style enterprise integration, with explicit production concerns around identity, durability, observability, and governance. [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/) [S2](https://www.microsoft.com/en-us/research/blog/autogen-v0-4-reimagining-the-foundation-of-agentic-ai-for-scale-extensibility-and-robustness/) [S3](https://learn.microsoft.com/en-us/agent-framework/overview/)
+As of **March 1, 2026**, Microsoft Agent Framework is in **Release Candidate** status for both .NET and Python, positioned as the unified successor path for AutoGen + Semantic Kernel-style agent development. [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/) [S2](https://learn.microsoft.com/en-us/agent-framework/overview/)
 
-## 1. Why This Matters in 2026
+The important shift for enterprise teams is operational, not cosmetic: move from prompt-centric prototypes to workflow-centric systems with explicit state, approvals, observability, and recovery strategies.
 
-Three shifts changed the decision criteria for AI-agent platforms:
+This update goes deeper than the original article and focuses on what teams need to actually ship in production.
 
-1. Teams moved from single-agent demos to multi-agent workflows that span multiple systems and approval points. [S4](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) [S5](https://learn.microsoft.com/en-us/agent-framework/workflows/orchestrations/)
-2. Platform choice became an operational decision (identity, auditability, reliability), not only an SDK preference. [S6](https://learn.microsoft.com/en-us/agent-framework/agents/observability) [S7](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/) [S8](https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-dec-2025-jan-2026/)
-3. Security teams started treating agents as a new attack surface, especially for indirect prompt injection and over-privileged tool execution. [S9](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/) [S10](https://www.microsoft.com/en-us/security/security-insider/emerging-trends/cyber-pulse-ai-security-report)
+## Visual Overview
 
-## 2. What Microsoft Agent Framework Actually Standardizes
+![Enterprise architecture blueprint for Microsoft Agent Framework](hero-architecture.jpg)
 
-MAF provides a common runtime model around three primitives:
+## 1. What Changed Since Early 2026
 
-- `Agents`: LLM-backed workers with tools and explicit capabilities.
-- `Threads/State`: managed conversational and workflow context.
-- `Workflows`: explicit orchestration graphs for deterministic and non-deterministic paths.
+### 1.1 Platform consolidation is now real
 
-In practice, this unifies what used to be split across AutoGen and Semantic Kernel and gives teams one migration target for production systems. [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/) [S2](https://www.microsoft.com/en-us/research/blog/autogen-v0-4-reimagining-the-foundation-of-agentic-ai-for-scale-extensibility-and-robustness/) [S3](https://learn.microsoft.com/en-us/agent-framework/overview/)
+The RC announcement confirms API stabilization toward 1.0 and a single framework surface across .NET and Python. [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/)
 
-## 3. Orchestration Patterns You Should Use Intentionally
+### 1.2 Security moved from afterthought to first-class concern
 
-Microsoft documentation and ecosystem examples converge on five pattern families. Picking the wrong one is a common source of latency, cost, and reliability issues. [S4](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) [S11](https://learn.microsoft.com/en-us/agent-framework/workflows/)
+Microsoft security guidance now frames agent autonomy as an expanded attack surface with specific exposure classes such as indirect prompt injection (XPIA), over-privileged tooling, and coordinator blast radius. [S3](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/) [S4](https://www.microsoft.com/en-us/security/security-insider/emerging-trends/cyber-pulse-ai-security-report)
 
-| Pattern | Best For | Main Advantage | Main Risk |
-| :--- | :--- | :--- | :--- |
-| Sequential | Deterministic pipelines (draft -> review -> publish) | Predictable and easy to debug | Slow if every step blocks the next |
-| Concurrent | Independent parallel analysis/review tasks | Throughput and latency improvement | Merge conflicts and inconsistent outputs |
-| Group Chat | Brainstorming, debate, maker-checker loops | Strong ideation quality | Token drift and endless loops |
-| Handoff | Triage + specialist delegation | Clean responsibility boundaries | Context loss across transfers |
-| Magentic-style orchestration | Open-ended, long-horizon tasks | Adaptive replanning | Harder to bound cost and runtime |
+### 1.3 Documentation maturity improved
 
-### Practical Rule
+Core Learn docs now provide clearer implementation patterns for middleware, observability, human-in-the-loop, and workflow checkpoints (many pages updated in February 2026 metadata). [S5](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/) [S6](https://learn.microsoft.com/en-us/agent-framework/agents/observability) [S7](https://learn.microsoft.com/en-us/agent-framework/workflows/human-in-the-loop) [S8](https://learn.microsoft.com/en-us/agent-framework/workflows/checkpoints)
 
-Default to **sequential + bounded concurrency** for production-critical flows. Use group-chat and open-ended orchestrators only behind stricter termination and budget controls. [S4](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) [S11](https://learn.microsoft.com/en-us/agent-framework/workflows/)
+## 2. Architecture Decision Model (Use This in Design Reviews)
 
-## 4. Memory and Durability: Where Most Proofs-of-Concept Break
+| Scenario | Prefer | Why |
+| :--- | :--- | :--- |
+| Deterministic business rule | Traditional code/executor | Cheapest and most reliable |
+| Open-ended reasoning/tool use | Agent | Dynamic planning + tool calling |
+| Multi-step controlled process | Workflow orchestration | Explicit topology, events, checkpointability |
+| High-risk side effects | Workflow + HITL/tool approval | Human control over privileged actions |
+| Long-running async operations | Workflow + checkpoints | Resume/recovery without restarting end-to-end |
 
-A prototype can survive with in-process memory. Production cannot.
+Back this with orchestration patterns guidance in Azure Architecture Center and Agent Framework workflow docs. [S9](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) [S10](https://learn.microsoft.com/en-us/agent-framework/workflows/)
 
-### Durable Execution
+```mermaid
+flowchart LR
+    U[User or Channel] --> O[Workflow Orchestrator]
+    O --> M[Policy Middleware]
+    M --> A[Agent Executor]
+    A --> T[Tool Layer]
+    T --> X[MCP Servers, APIs, Data Stores]
+    M --> G[Approval Guard]
+    G --> H[Human Reviewer]
+    A --> C[Checkpoint Storage]
+    A --> E[OpenTelemetry Export]
+    E --> D[SLO Dashboards and Alerts]
+    C --> R[Restore and Replay]
+```
 
-Using durable workflows (Azure Functions integration in MAF docs) changes the operating model:
+## 3. Production Implementation Patterns with Code
 
-- Workflow state can survive host restarts.
-- Long-running steps can pause and resume.
-- Human-in-the-loop approvals can wait hours or days without burning compute.
+> Note: APIs are RC and may evolve before GA. Keep SDK pinning + changelog review in your release process. [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/)
 
-This is fundamental for enterprise workflows that cross team boundaries and SLAs. [S12](https://learn.microsoft.com/en-us/agent-framework/integrations/azure-functions) [S13](https://learn.microsoft.com/en-us/agent-framework/workflows/human-in-the-loop)
+### 3.1 Running agents (streaming and non-streaming)
 
-### Long-Term Memory Strategy
+```csharp
+// Non-streaming
+Console.WriteLine(await agent.RunAsync("What is the weather like in Amsterdam?"));
 
-Treat memory as tiered:
+// Streaming
+await foreach (var update in agent.RunStreamingAsync("What is the weather like in Amsterdam?"))
+{
+    Console.Write(update);
+}
+```
 
-- Session memory for immediate reasoning.
-- Summarized memory for cross-session continuity.
-- Profile memory for durable user/context preferences.
+```python
+# Non-streaming
+result = await agent.run("What is the weather like in Amsterdam?")
+print(result.text)
 
-Do not treat memory as a generic dump. Define retention, classification, and redaction policy before rollout. [S14](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/concepts/what-is-memory?view=foundry) [S10](https://www.microsoft.com/en-us/security/security-insider/emerging-trends/cyber-pulse-ai-security-report)
+# Streaming
+async for update in agent.run("What is the weather like in Amsterdam?", stream=True):
+    if update.text:
+        print(update.text, end="", flush=True)
+```
 
-## 5. Observability Must Be Designed Up Front
+Source pattern from Running Agents docs. [S11](https://learn.microsoft.com/en-us/agent-framework/agents/running-agents)
 
-MAF observability guidance centers on OpenTelemetry and end-to-end tracing into Azure monitoring surfaces. [S6](https://learn.microsoft.com/en-us/agent-framework/agents/observability) [S15](https://learn.microsoft.com/en-us/azure/azure-monitor/app/agents-view) [S16](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk?view=foundry-classic)
+### 3.2 Middleware for policy enforcement and audit hooks
 
-Minimum telemetry contract for each workflow run:
+```csharp
+var middlewareEnabledAgent = originalAgent
+    .AsBuilder()
+        .Use(runFunc: CustomAgentRunMiddleware, runStreamingFunc: CustomAgentRunStreamingMiddleware)
+        .Use(CustomFunctionCallingMiddleware)
+    .Build();
 
-- `agent_id`, `workflow_id`, `run_id`, `user_or_service_principal`.
-- Step latency and tool latency percentiles.
-- Prompt/completion token counts and cost attribution.
-- Tool error classes and retry counts.
-- Human-approval wait time and reject/approve outcomes.
+async Task<AgentResponse> CustomAgentRunMiddleware(
+    IEnumerable<ChatMessage> messages,
+    AgentSession? session,
+    AgentRunOptions? options,
+    AIAgent innerAgent,
+    CancellationToken cancellationToken)
+{
+    Console.WriteLine(messages.Count());
+    var response = await innerAgent.RunAsync(messages, session, options, cancellationToken).ConfigureAwait(false);
+    Console.WriteLine(response.Messages.Count);
+    return response;
+}
+```
 
-If you cannot reconstruct "who did what, when, and why" from telemetry, you do not have production readiness yet.
+```python
+async def logging_agent_middleware(context: AgentContext, next: Callable[[AgentContext], Awaitable[None]]) -> None:
+    print("[Agent] Starting execution")
+    await next(context)
+    print("[Agent] Execution completed")
+```
 
-## 6. Security Posture: Agentic Systems Need Zero-Trust Controls
+Use middleware to enforce out-of-band authorization and audit controls, not prompt-only policy checks. [S5](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/)
 
-Agent systems are dual-use. The same capability that accelerates internal automation can accelerate abuse if boundaries are weak. [S9](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/) [S10](https://www.microsoft.com/en-us/security/security-insider/emerging-trends/cyber-pulse-ai-security-report)
+### 3.3 Observability with OpenTelemetry
+
+```csharp
+var instrumentedChatClient = new AzureOpenAIClient(new Uri(endpoint), new DefaultAzureCredential())
+    .GetChatClient(deploymentName)
+    .AsIChatClient()
+    .AsBuilder()
+    .UseOpenTelemetry(sourceName: "MyApplication", configure: (cfg) => cfg.EnableSensitiveData = false)
+    .Build();
+
+using var tracerProvider = Sdk.CreateTracerProviderBuilder()
+    .AddSource("MyApplication")
+    .AddSource("*Microsoft.Extensions.AI")
+    .AddSource("*Microsoft.Extensions.Agents*")
+    .AddAzureMonitorTraceExporter(options => options.ConnectionString = applicationInsightsConnectionString)
+    .Build();
+```
+
+```python
+from agent_framework.observability import configure_otel_providers
+
+# Reads OTEL_EXPORTER_OTLP_* vars
+configure_otel_providers()
+```
+
+Important operational note: avoid enabling sensitive telemetry in production unless explicitly governed; prompts and tool arguments can leak data. [S6](https://learn.microsoft.com/en-us/agent-framework/agents/observability)
+
+### 3.4 Tool approvals (HITL) for privileged actions
+
+```csharp
+AIFunction weatherFunction = AIFunctionFactory.Create(GetWeather);
+AIFunction approvalRequiredWeatherFunction = new ApprovalRequiredAIFunction(weatherFunction);
+
+AgentSession session = await agent.CreateSessionAsync();
+AgentResponse response = await agent.RunAsync("What is the weather like in Amsterdam?", session);
+
+var functionApprovalRequests = response.Messages
+    .SelectMany(x => x.Contents)
+    .OfType<FunctionApprovalRequestContent>()
+    .ToList();
+
+if (functionApprovalRequests.Any())
+{
+    var requestContent = functionApprovalRequests.First();
+    var approvalMessage = new ChatMessage(ChatRole.User, [requestContent.CreateResponse(true)]);
+    Console.WriteLine(await agent.RunAsync(approvalMessage, session));
+}
+```
+
+```python
+@tool(approval_mode="always_require")
+def get_weather_detail(location: Annotated[str, "The city and state"]) -> str:
+    return f"Detailed weather for {location}"
+
+result = await agent.run("What is the detailed weather like in Amsterdam?")
+if result.user_input_requests:
+    user_input_needed = result.user_input_requests[0]
+    approval_message = Message(role="user", contents=[user_input_needed.create_response(True)])
+```
+
+This is a practical bridge between autonomous tool use and enterprise control requirements. [S12](https://learn.microsoft.com/en-us/agent-framework/agents/tools/tool-approval) [S7](https://learn.microsoft.com/en-us/agent-framework/workflows/human-in-the-loop)
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant A as Agent
+    participant G as Approval Guard
+    participant H as Human Reviewer
+    participant T as Privileged Tool
+
+    U->>A: Request task
+    A->>G: FunctionApprovalRequest
+    G->>H: Show action and context
+    alt Approved
+        H-->>G: Approve
+        G-->>A: ApprovalResponse(true)
+        A->>T: Execute tool call
+        T-->>A: Tool result
+        A-->>U: Final response
+    else Rejected
+        H-->>G: Reject
+        G-->>A: ApprovalResponse(false)
+        A-->>U: Denied or fallback response
+    end
+```
+
+### 3.5 Sequential orchestration (pipeline style)
+
+```csharp
+var workflow = AgentWorkflowBuilder.BuildSequential(translationAgents);
+
+StreamingRun run = await InProcessExecution.StreamAsync(workflow, messages);
+await run.TrySendMessageAsync(new TurnToken(emitEvents: true));
+
+await foreach (WorkflowEvent evt in run.WatchStreamAsync().ConfigureAwait(false))
+{
+    if (evt is AgentResponseUpdateEvent e)
+    {
+        Console.WriteLine($"{e.ExecutorId}: {e.Data}");
+    }
+    else if (evt is WorkflowOutputEvent outputEvt)
+    {
+        break;
+    }
+}
+```
+
+```python
+workflow = SequentialBuilder(participants=[writer, reviewer]).build()
+
+async for event in workflow.run_stream("Write a tagline for a budget-friendly eBike."):
+    if event.type == "output":
+        output_evt = event
+```
+
+Use this pattern when order and dependency are explicit; do not overuse handoff/group-chat for deterministic chains. [S13](https://learn.microsoft.com/en-us/agent-framework/workflows/orchestrations/sequential) [S9](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
+
+### 3.6 Checkpointing and restore for long-running reliability
+
+```csharp
+var checkpointManager = new CheckpointManager();
+var checkpoints = new List<CheckpointInfo>();
+
+Checkpointed<StreamingRun> checkpointedRun = await InProcessExecution
+    .StreamAsync(workflow, input, checkpointManager)
+    .ConfigureAwait(false);
+
+await foreach (WorkflowEvent evt in checkpointedRun.Run.WatchStreamAsync().ConfigureAwait(false))
+{
+    if (evt is SuperStepCompletedEvent superStepCompletedEvt)
+    {
+        CheckpointInfo? checkpoint = superStepCompletedEvt.CompletionInfo!.Checkpoint;
+        if (checkpoint != null) checkpoints.Add(checkpoint);
+    }
+}
+
+// Restore from saved checkpoint
+CheckpointInfo savedCheckpoint = checkpoints[5];
+await checkpointedRun.RestoreCheckpointAsync(savedCheckpoint, CancellationToken.None).ConfigureAwait(false);
+```
+
+```python
+checkpoint_storage = InMemoryCheckpointStorage()
+# ... build workflow with checkpoint storage ...
+checkpoints = await checkpoint_storage.list_checkpoints()
+
+saved_checkpoint = checkpoints[5]
+async for event in workflow.run_stream(checkpoint_id=saved_checkpoint.checkpoint_id):
+    ...
+```
+
+This is the key reliability primitive for resumability, replay debugging, and safe interruption handling. [S8](https://learn.microsoft.com/en-us/agent-framework/workflows/checkpoints)
+
+```mermaid
+stateDiagram-v2
+    [*] --> Running
+    Running --> SuperStepDone: SuperStepCompletedEvent
+    SuperStepDone --> CheckpointSaved: persist CheckpointInfo
+    CheckpointSaved --> Running: continue execution
+    Running --> Failed: error, timeout, cancellation
+    Failed --> Restoring: select checkpoint
+    Restoring --> Running: restore and resume
+    Running --> Completed: WorkflowOutputEvent
+    Completed --> [*]
+```
+
+### 3.7 MCP tool integration
+
+```csharp
+var mcpTools = await mcpClient.ListToolsAsync().ConfigureAwait(false);
+
+AIAgent agent = new AzureOpenAIClient(new Uri(endpoint), new DefaultAzureCredential())
+     .GetChatClient(deploymentName)
+     .AsAIAgent(
+         instructions: "You answer questions related to GitHub repositories only.",
+         tools: [.. mcpTools.Cast<AITool>()]);
+```
+
+```python
+async with (
+    MCPStdioTool(name="calculator", command="uvx", args=["mcp-server-calculator"]) as mcp_server,
+    Agent(chat_client=OpenAIChatClient(), name="MathAgent", instructions="You are a helpful math assistant.") as agent,
+):
+    result = await agent.run("What is 15 * 23 + 45?", tools=mcp_server)
+```
+
+Treat MCP servers as external trust boundaries; inventory and gate them like any privileged integration. [S14](https://learn.microsoft.com/en-us/agent-framework/agents/tools/local-mcp-tools)
+
+## 4. Security Hardening Checklist (Production Minimum)
 
 ![Zero-trust security controls for enterprise agent systems](security-posture.jpg)
 
-Core controls to make non-optional:
+1. Enforce least-privilege identity for runtime credentials.
+2. Keep authorization checks in middleware/policy layers, not prompts.
+3. Require approvals on high-risk tools (payments, writes, destructive ops).
+4. Segment tool networks and maintain explicit allowlists.
+5. Log every side effect with actor, tool, arguments hash, and result.
+6. Run red-team scenarios for indirect prompt injection and tool abuse.
 
-- Identity propagation with least privilege (user or service scope, never blanket credentials). [S7](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/)
-- Tool-authorization checks in middleware and policy layers, not only in prompts.
-- Prompt-shield and content safety controls for injection/unsafe instructions. [S9](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/)
-- Segmented tool networks and allowlists for high-impact actions.
-- Full audit trail for every external side effect.
+Security posture rationale and threat model patterns: [S3](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/) [S4](https://www.microsoft.com/en-us/security/security-insider/emerging-trends/cyber-pulse-ai-security-report)
 
-### Anti-Pattern to Avoid
+## 5. SLOs and KPIs That Actually Matter
 
-Putting access rules only inside the system prompt is not security architecture. Enforce authorization outside the model path. [S7](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/) [S17](https://www.digitalapplied.com/blog/mcp-vs-langchain-vs-crewai-agent-framework-comparison)
+| Domain | Metric | Why |
+| :--- | :--- | :--- |
+| Reliability | Workflow success rate | Core business continuity indicator |
+| Latency | P95 end-to-end run latency | User-facing responsiveness |
+| Cost | Cost per successful run | Real economic efficiency |
+| Safety | Approval-required action reject rate | Guardrail quality and policy fit |
+| Quality | Human rework rate after agent output | Signal for prompt/tool/workflow drift |
+| Operations | Mean time to recover failed run (checkpoint restore) | Resilience maturity |
 
-## 7. Framework Trade-offs in 2026 (MAF vs LangGraph vs CrewAI)
+Use OpenTelemetry traces plus workflow events to compute these consistently. [S6](https://learn.microsoft.com/en-us/agent-framework/agents/observability) [S8](https://learn.microsoft.com/en-us/agent-framework/workflows/checkpoints)
 
-| Dimension | Microsoft Agent Framework | LangGraph | CrewAI |
-| :--- | :--- | :--- | :--- |
-| Enterprise governance | Strong native alignment with Microsoft identity, policy, and cloud controls [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/) [S7](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/) | Usually custom-built per project [S18](https://www.turing.com/resources/ai-agent-frameworks) | Simpler role model, fewer enterprise defaults [S18](https://www.turing.com/resources/ai-agent-frameworks) |
-| Orchestration control | Strong built-in patterns and workflow model [S4](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) [S11](https://learn.microsoft.com/en-us/agent-framework/workflows/) | Deep low-level graph/state control [S18](https://www.turing.com/resources/ai-agent-frameworks) | Fast role-based team setup, less flexible for edge cases [S18](https://www.turing.com/resources/ai-agent-frameworks) |
-| Observability | OpenTelemetry + Azure monitoring surfaces [S6](https://learn.microsoft.com/en-us/agent-framework/agents/observability) [S15](https://learn.microsoft.com/en-us/azure/azure-monitor/app/agents-view) | Strong with LangSmith ecosystem [S18](https://www.turing.com/resources/ai-agent-frameworks) | Adequate but can become opaque in complex flows [S18](https://www.turing.com/resources/ai-agent-frameworks) |
-| Security model | Better default story for enterprise on Microsoft stack [S7](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/) [S9](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/) | Depends heavily on custom controls [S18](https://www.turing.com/resources/ai-agent-frameworks) | Depends on deployment model and add-ons [S18](https://www.turing.com/resources/ai-agent-frameworks) |
-| Lock-in profile | Reduced by MCP/OpenAPI/A2A integrations, but still Microsoft-centric [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/) [S19](https://www.softwareseni.com/model-context-protocol-and-the-battle-for-ai-agent-standardisation-across-frameworks-and-platforms/) | More model-agnostic, LangChain-centric abstractions [S18](https://www.turing.com/resources/ai-agent-frameworks) | Flexible for quick starts, less standardized for governance [S18](https://www.turing.com/resources/ai-agent-frameworks) |
-| Time-to-first-production | Fast for Azure/.NET/Python teams with existing Microsoft footprint [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/) [S3](https://learn.microsoft.com/en-us/agent-framework/overview/) | Slower initial ramp, stronger for custom graph experts [S18](https://www.turing.com/resources/ai-agent-frameworks) | Very fast prototype velocity [S18](https://www.turing.com/resources/ai-agent-frameworks) |
+## 6. High-Impact Anti-Patterns (Seen Repeatedly)
 
-## 8. 90-Day Enterprise Rollout Plan
+1. Using adaptive orchestrators where sequential workflows are enough.
+2. Letting concurrent participants mutate shared state without conflict rules.
+3. No max-turn or max-tool-call budget in conversational loops.
+4. Enabling sensitive telemetry in production by default.
+5. Deploying with `DefaultAzureCredential` fallback behavior unreviewed in prod.
+
+Practical guidance appears directly in middleware and observability docs warnings. [S5](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/) [S6](https://learn.microsoft.com/en-us/agent-framework/agents/observability)
+
+## 7. 90-Day Delivery Plan (Detailed)
 
 ![90-day rollout roadmap for Microsoft Agent Framework adoption](rollout-roadmap.jpg)
 
-| Phase | Timeline | Deliverables | Owner | KPIs |
-| :--- | :--- | :--- | :--- | :--- |
-| Discovery | Days 1-15 | Prioritized use cases, architecture boundaries, risk register | Enterprise Architect + Product | Signed target metrics (latency, quality, cost), approved control scope |
-| Prototype | Days 16-45 | 1-2 workflow pilots with explicit orchestration and tool policy | AI Engineering Lead | Task success rate, mean step latency, first-pass quality score |
-| Hardening | Days 46-75 | RBAC, safety controls, OTel traces, HITL checkpoints, chaos tests | DevOps + SecOps | 100% traced runs, zero critical policy bypasses, bounded retry behavior |
-| Production | Days 76-90 | Staged rollout, SLO dashboards, cost guardrails, incident playbook | Platform Operations | SLO attainment, cost per successful run, incident MTTR |
+| Phase | Timeline | Deliverables | Exit Criteria |
+| :--- | :--- | :--- | :--- |
+| Foundation | Days 1-20 | Baseline architecture, identity model, telemetry baseline, initial pilot workflow | Traces + logs + metrics visible end-to-end |
+| Controlled pilot | Days 21-45 | One workflow with HITL tool approvals and rollback path | No uncontrolled side effects in pilot scope |
+| Hardening | Days 46-70 | Checkpoint restore, incident runbooks, policy middleware, load tests | Recovery drill passes and policy tests green |
+| Rollout | Days 71-90 | Progressive prod rollout with SLO dashboards and cost alerts | SLOs met for two consecutive release cycles |
 
-## 9. Design Principles That Hold Up in Production
-
-1. Keep orchestration explicit: graphs over pure conversational improvisation.
-2. Separate reasoning from authorization: models decide intent, policy decides execution.
-3. Design for pause/resume from day one: human approvals and external dependencies are normal.
-4. Measure outcomes, not demos: quality, cost, latency, and incident behavior.
-5. Make rollback a first-class feature: every workflow change needs safe fallback.
-
-## 10. Common Failure Modes
-
-- Unbounded tool-calling loops with no budget or step caps.
-- Shared mutable state across concurrent agents without conflict strategy.
-- No ownership split between platform team, domain team, and security team.
-- Treating memory as unrestricted storage of sensitive context.
-- Launching without red-team scenarios for injection and privilege escalation.
+```mermaid
+gantt
+    title 90-Day Microsoft Agent Framework Rollout
+    dateFormat  YYYY-MM-DD
+    axisFormat  %d %b
+    section Foundation
+    Architecture, identity, telemetry       :done, phase1, 2026-02-23, 20d
+    section Controlled Pilot
+    HITL approvals and rollback path        :active, phase2, after phase1, 25d
+    section Hardening
+    Checkpoints, runbooks, load tests       :phase3, after phase2, 25d
+    section Rollout
+    Progressive production and SLO controls :phase4, after phase3, 20d
+```
 
 ## Conclusion
 
-Microsoft Agent Framework is not just another agent SDK. In 2026 it is best understood as a production operating model: workflow-first orchestration, cloud-native durability, standardized telemetry, and security controls aligned to enterprise governance. [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/) [S4](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) [S6](https://learn.microsoft.com/en-us/agent-framework/agents/observability) [S9](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/)
+The fastest way to lose momentum with agents in 2026 is to optimize prompts before you optimize systems.
 
-Adoption success depends less on model quality and more on system discipline. Teams that define clear orchestration boundaries, enforce policy out-of-band, and instrument every run will scale safely. Teams that skip those foundations will ship fragile automation with hidden risk.
+Microsoft Agent Framework is now mature enough that architecture discipline is the differentiator: explicit workflows, enforced approvals, durable recovery, and observable execution.
+
+If your team can answer "what happened, why, and how to safely resume" for any run, you are on the right trajectory.
 
 ## Source Mapping
 
 - **S1**: [Microsoft Agent Framework Reaches Release Candidate](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/)
-- **S2**: [AutoGen v0.4 (Microsoft Research)](https://www.microsoft.com/en-us/research/blog/autogen-v0-4-reimagining-the-foundation-of-agentic-ai-for-scale-extensibility-and-robustness/)
-- **S3**: [Microsoft Agent Framework Overview (Microsoft Learn)](https://learn.microsoft.com/en-us/agent-framework/overview/)
-- **S4**: [AI Agent Orchestration Patterns (Azure Architecture Center)](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
-- **S5**: [Workflow Orchestrations in Agent Framework](https://learn.microsoft.com/en-us/agent-framework/workflows/orchestrations/)
-- **S6**: [Observability in Agent Framework (Microsoft Learn)](https://learn.microsoft.com/en-us/agent-framework/agents/observability)
-- **S7**: [Agent Middleware (Microsoft Learn)](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/)
-- **S8**: [What's New in Microsoft Foundry (Dec 2025 & Jan 2026)](https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-dec-2025-jan-2026/)
-- **S9**: [A New Era of Agents, A New Era of Posture (Microsoft Security)](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/)
-- **S10**: [Cyber Pulse: An AI Security Report (Microsoft)](https://www.microsoft.com/en-us/security/security-insider/emerging-trends/cyber-pulse-ai-security-report)
-- **S11**: [Microsoft Agent Framework Workflows](https://learn.microsoft.com/en-us/agent-framework/workflows/)
-- **S12**: [Azure Functions Integration for Agent Framework](https://learn.microsoft.com/en-us/agent-framework/integrations/azure-functions)
-- **S13**: [Human-in-the-Loop Workflows (Microsoft Learn)](https://learn.microsoft.com/en-us/agent-framework/workflows/human-in-the-loop)
-- **S14**: [What is Memory? (Microsoft Foundry)](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/concepts/what-is-memory?view=foundry)
-- **S15**: [Monitor AI Agents with Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/agents-view)
-- **S16**: [Trace and Observe AI Agents in Microsoft Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk?view=foundry-classic)
-- **S17**: [MCP vs LangChain vs CrewAI (DigitalApplied)](https://www.digitalapplied.com/blog/mcp-vs-langchain-vs-crewai-agent-framework-comparison)
-- **S18**: [A Detailed Comparison of Top 6 AI Agent Frameworks in 2026 (Turing)](https://www.turing.com/resources/ai-agent-frameworks)
-- **S19**: [Model Context Protocol and Standardization Across Frameworks](https://www.softwareseni.com/model-context-protocol-and-the-battle-for-ai-agent-standardisation-across-frameworks-and-platforms/)
-
+- **S2**: [Microsoft Agent Framework Overview](https://learn.microsoft.com/en-us/agent-framework/overview/)
+- **S3**: [A new era of agents, a new era of posture (Microsoft Security)](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/)
+- **S4**: [Cyber Pulse: An AI Security Report](https://www.microsoft.com/en-us/security/security-insider/emerging-trends/cyber-pulse-ai-security-report)
+- **S5**: [Agent Middleware](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/)
+- **S6**: [Observability](https://learn.microsoft.com/en-us/agent-framework/agents/observability)
+- **S7**: [Human-in-the-Loop Workflows](https://learn.microsoft.com/en-us/agent-framework/workflows/human-in-the-loop)
+- **S8**: [Workflows - Checkpoints](https://learn.microsoft.com/en-us/agent-framework/workflows/checkpoints)
+- **S9**: [AI Agent Orchestration Patterns (Azure Architecture Center)](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
+- **S10**: [Microsoft Agent Framework Workflows](https://learn.microsoft.com/en-us/agent-framework/workflows/)
+- **S11**: [Running Agents](https://learn.microsoft.com/en-us/agent-framework/agents/running-agents)
+- **S12**: [Using function tools with human in the loop approvals](https://learn.microsoft.com/en-us/agent-framework/agents/tools/tool-approval)
+- **S13**: [Workflows Orchestrations - Sequential](https://learn.microsoft.com/en-us/agent-framework/workflows/orchestrations/sequential)
+- **S14**: [Using MCP Tools with Agents](https://learn.microsoft.com/en-us/agent-framework/agents/tools/local-mcp-tools)

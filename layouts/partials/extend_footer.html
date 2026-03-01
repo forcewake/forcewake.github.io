@@ -1,45 +1,47 @@
-{{- /* Mermaid diagram support - only loads when needed */ -}}
-{{ if .Store.Get "hasMermaid" }}
 <script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  const mermaidBlocks = document.querySelectorAll('pre.mermaid');
+  if (!mermaidBlocks.length) {
+    // No diagrams on this page; skip loading Mermaid.
+  } else {
+    const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs');
 
-  // Detect theme for mermaid
-  const getTheme = () => {
-    const theme = document.documentElement.getAttribute('data-theme');
-    if (theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      return 'dark';
-    }
-    return 'default';
-  };
+    // Detect theme for mermaid
+    const getTheme = () => {
+      const theme = document.documentElement.getAttribute('data-theme');
+      if (theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        return 'dark';
+      }
+      return 'default';
+    };
 
-  // Initialize mermaid with theme support
-  mermaid.initialize({
-    startOnLoad: true,
-    theme: getTheme(),
-    securityLevel: 'loose',
-    flowchart: {
-      useMaxWidth: true,
-      htmlLabels: true,
-      curve: 'basis'
-    },
-    sequence: {
-      useMaxWidth: true,
-      diagramMarginX: 50,
-      diagramMarginY: 10,
-      actorMargin: 50,
-      width: 150,
-      height: 65
-    },
-    gantt: {
-      useMaxWidth: true
-    }
-  });
+    // Initialize mermaid with theme support
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: getTheme(),
+      securityLevel: 'loose',
+      flowchart: {
+        useMaxWidth: true,
+        htmlLabels: true,
+        curve: 'basis'
+      },
+      sequence: {
+        useMaxWidth: true,
+        diagramMarginX: 50,
+        diagramMarginY: 10,
+        actorMargin: 50,
+        width: 150,
+        height: 65
+      },
+      gantt: {
+        useMaxWidth: true
+      }
+    });
 
-  // Re-render on theme change
-  const observer = new MutationObserver(() => {
-    mermaid.initialize({ theme: getTheme() });
-    mermaid.run();
-  });
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    // Re-render on theme change
+    const observer = new MutationObserver(() => {
+      mermaid.initialize({ theme: getTheme() });
+      mermaid.run();
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  }
 </script>
-{{ end }}
