@@ -1,8 +1,6 @@
 <script type="module">
   const mermaidBlocks = document.querySelectorAll('pre.mermaid');
-  if (!mermaidBlocks.length) {
-    // No diagrams on this page; skip loading Mermaid.
-  } else {
+  if (mermaidBlocks.length) {
     const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs');
 
     // Detect theme for mermaid
@@ -14,34 +12,50 @@
       return 'default';
     };
 
-    // Initialize mermaid with theme support
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: getTheme(),
-      securityLevel: 'loose',
-      flowchart: {
-        useMaxWidth: true,
-        htmlLabels: true,
-        curve: 'basis'
-      },
-      sequence: {
-        useMaxWidth: true,
-        diagramMarginX: 50,
-        diagramMarginY: 10,
-        actorMargin: 50,
-        width: 150,
-        height: 65
-      },
-      gantt: {
-        useMaxWidth: true
+    const renderMermaid = async () => {
+      // Preserve source so diagrams can be re-rendered on theme changes.
+      for (const block of mermaidBlocks) {
+        if (!block.dataset.mermaidSource) {
+          block.dataset.mermaidSource = block.textContent || '';
+        }
+        block.textContent = block.dataset.mermaidSource;
+        block.removeAttribute('data-processed');
       }
-    });
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: getTheme(),
+        securityLevel: 'loose',
+        flowchart: {
+          useMaxWidth: true,
+          htmlLabels: true,
+          curve: 'basis'
+        },
+        sequence: {
+          useMaxWidth: true,
+          diagramMarginX: 50,
+          diagramMarginY: 10,
+          actorMargin: 50,
+          width: 150,
+          height: 65
+        },
+        gantt: {
+          useMaxWidth: true
+        }
+      });
+
+      await mermaid.run({ nodes: mermaidBlocks, suppressErrors: true });
+    };
+
+    await renderMermaid();
 
     // Re-render on theme change
-    const observer = new MutationObserver(() => {
-      mermaid.initialize({ theme: getTheme() });
-      mermaid.run();
+    const observer = new MutationObserver(async () => {
+      await renderMermaid();
     });
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    });
   }
 </script>
