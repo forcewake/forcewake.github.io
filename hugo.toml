@@ -40,6 +40,29 @@ summaryLength = 20
   favicon = "/favicon.ico"
   mode = "auto" # "dark", "auto", "light"
 
+  # PaperMod features
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowRssButtonInSectionTermList = true
+  UseHugoToc = true
+  ShowToc = true
+  TocOpen = false
+
+  # Enable site search
+  enableSearch = true
+
+  # Social share buttons
+  ShareButtons = ["twitter", "linkedin", "reddit", "whatsapp", "telegram"]
+
+  # Edit post link (GitHub)
+  [params.editPost]
+    URL = "https://github.com/forcewake/forcewake.github.io/tree/master/content/"
+    Text = "Suggest Changes"
+    appendFilePath = true
+
   # Author info (used by theme for RSS, etc.)
   [params.author]
     name = "Pavel Nasovich"

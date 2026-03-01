@@ -1,0 +1,59 @@
+{{/* JSON-LD Structured Data for SEO */}}
+{{ if .IsPage }}
+{{ $author := .Site.Params.author.name }}
+{{ $date := .Date.Format "2006-01-02T15:04:05Z07:00" }}
+{{ $modified := .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}
+{{ $image := "" }}
+{{ if .Params.cover }}
+  {{ if .Params.cover.image }}
+    {{ $image = printf "%s%s" .Site.BaseURL .Params.cover.image }}
+  {{ end }}
+{{ end }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ .Title }}",
+  "description": "{{ .Description | default .Summary | plainify | truncate 160 }}",
+  "datePublished": "{{ $date }}",
+  "dateModified": "{{ $modified }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ $author }}",
+    "url": "{{ .Site.Params.author.link }}"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "{{ $author }}",
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  },
+  "url": "{{ .Permalink }}"{{ with $image }},
+  "image": "{{ . }}"{{ end }}{{ with .Params.tags }},
+  "keywords": "{{ delimit . ", " }}"{{ end }}{{ with .WordCount }},
+  "wordCount": {{ . }}{{ end }}
+}
+</script>
+{{ end }}
+
+{{/* Open Graph / Facebook */}}
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:description" content="{{ .Description | default .Summary | plainify | truncate 160 }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+{{ if .Params.cover }}{{ with .Params.cover.image }}
+<meta property="og:image" content="{{ $.Site.BaseURL }}{{ . }}">
+{{ end }}{{ end }}
+
+{{/* Twitter / X */}}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@forcewake">
+<meta name="twitter:title" content="{{ .Title }}">
+<meta name="twitter:description" content="{{ .Description | default .Summary | plainify | truncate 160 }}">
+{{ if .Params.cover }}{{ with .Params.cover.image }}
+<meta name="twitter:image" content="{{ $.Site.BaseURL }}{{ . }}">
+{{ end }}{{ end }}
