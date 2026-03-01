@@ -1,0 +1,15 @@
+/* Ensure giscus uses the full post width even if iframe inline sizing fails */
+.giscus {
+  width: 100%;
+  max-width: 100%;
+}
+
+.giscus-frame {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.giscus iframe {
+  width: 100% !important;
+  max-width: 100% !important;
+}

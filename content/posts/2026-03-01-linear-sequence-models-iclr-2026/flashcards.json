@@ -1,0 +1,285 @@
+{
+  "title": "Architecture Flashcards",
+  "cards": [
+    {
+      "front": "What are the three core methodological improvements introduced in the Mamba-3 architecture?",
+      "back": "Trapezoidal discretization, complex-valued state updates, and a multi-input multi-output (MIMO) formulation."
+    },
+    {
+      "front": "What is the primary benefit of replacing Euler discretization with the trapezoidal rule in Mamba-3?",
+      "back": "It offers a lower sequence approximation error by using a second-order accurate recurrence."
+    },
+    {
+      "front": "How does Mamba-3 implement complex-valued dynamics without high computational overhead?",
+      "back": "It uses an equivalence to data-dependent Rotary Embedding (RoPE) rotations on the $B$ and $C$ projections."
+    },
+    {
+      "front": "What hardware bottleneck does the Mamba-3 MIMO formulation specifically target?",
+      "back": "The memory-bound nature of decoding in sequence models."
+    },
+    {
+      "front": "In the context of Mamba-3, what does 'MIMO' stand for?",
+      "back": "Multi-Input Multi-Output."
+    },
+    {
+      "front": "How does the MIMO formulation in Mamba-3 increase 'arithmetic intensity' during decoding?",
+      "back": "It replaces single-vector outer products with matrix-matrix updates."
+    },
+    {
+      "front": "What is the 'retrieval gap' observed in pure State Space Models (SSMs) compared to Transformers?",
+      "back": "Fixed-state SSMs generally show weaker information extraction capabilities as context length grows."
+    },
+    {
+      "front": "Which architectural strategy is suggested to resolve the retrieval limitations of pure Mamba-3?",
+      "back": "Hybrid architectures that interleave SSM layers with self-attention layers."
+    },
+    {
+      "front": "Why were short convolutions removed in the Mamba-3 architecture?",
+      "back": "Trapezoidal discretization and the introduction of $BC$ bias made the explicit convolution layers redundant."
+    },
+    {
+      "front": "What is the hypothesized role of the $BC$ bias in Mamba-3?",
+      "back": "It allows the model to run Linear Time-Invariant (LTI) and data-dependent SSMs simultaneously."
+    },
+    {
+      "front": "How does the training cost of Mamba-3 MIMO compare to its SISO variant?",
+      "back": "MIMO increases training cost because the training phase is compute-bound rather than memory-bound."
+    },
+    {
+      "front": "What does 'SISO' stand for in the context of sequence model variants?",
+      "back": "Single-Input Single-Output."
+    },
+    {
+      "front": "What is the 'RoPE trick' used in Mamba-3 complex dynamics?",
+      "back": "Representing complex state updates as rotations applied to the input and output projections."
+    },
+    {
+      "front": "According to Mamba-3 evaluations, how does the hybrid model's retrieval performance compare to a pure Transformer?",
+      "back": "The hybrid model can outperform the Transformer baseline on real-world retrieval tasks like SWDE and FDA."
+    },
+    {
+      "front": "What specific task is used to demonstrate Mamba-3's superior state-tracking capabilities?",
+      "back": "Formal language tasks such as parity and modular arithmetic."
+    },
+    {
+      "front": "What defines 'Error-Free Linear Attention' (EFLA)?",
+      "back": "A linear attention mechanism that uses an exact closed-form solution to the continuous-time dynamics of the delta rule."
+    },
+    {
+      "front": "EFLA identifies that the core limitation of existing linear attention methods is low-order _____.",
+      "back": "Discretization"
+    },
+    {
+      "front": "Which numerical integration scheme is implicitly used by standard DeltaNet?",
+      "back": "The first-order Explicit Euler method."
+    },
+    {
+      "front": "How does EFLA achieve linear-time complexity for computing matrix exponentials?",
+      "back": "By leveraging the rank-1 structure of the dynamics matrix $A_t = k_t k_t^T$."
+    },
+    {
+      "front": "What is the 'Aha!' moment described in the EFLA paper regarding the dynamics matrix $A_t$?",
+      "back": "The property that $A_t^n = \\lambda_t^{n-1} A_t$ for $n \\ge 1$, where $\\lambda_t = k_t^T k_t$."
+    },
+    {
+      "front": "What physical assumption does EFLA use to model continuous signals from discrete sequences?",
+      "back": "The Zero-Order Hold (ZOH) assumption."
+    },
+    {
+      "front": "In EFLA, what serves as the 'spectral gate' regulating forgetting and retention?",
+      "back": "The key norm $||k_t||^2$."
+    },
+    {
+      "front": "How does a large key norm $||k_t||^2$ affect memory in the EFLA update rule?",
+      "back": "It causes rapid exponential decay of the existing state, clearing memory for new information."
+    },
+    {
+      "front": "What happens to the EFLA update rule as the key norm approaches zero?",
+      "back": "It asymptotically recovers the standard delta rule update."
+    },
+    {
+      "front": "Why does EFLA require a larger global learning rate compared to DeltaNet?",
+      "back": "To compensate for the exponential saturation effect of the exact decay factor."
+    },
+    {
+      "front": "What is the local truncation error order for Euler discretization in linear attention?",
+      "back": "It is $O(\\beta_t^2)$."
+    },
+    {
+      "front": "Concept: Zero-Order Hold (ZOH)",
+      "back": "Definition: A mathematical model of the practical signal reconstruction done by a digital-to-analogue converter, where the signal is held constant between samples."
+    },
+    {
+      "front": "Which benchmark is used to evaluate the modelling capabilities of model architectures through synthetic token manipulation?",
+      "back": "The MAD (Mechanistic Architecture Design) benchmark."
+    },
+    {
+      "front": "What is the primary cause of numerical instability in linear attention during long sequences?",
+      "back": "Error accumulation from low-order numerical integration of stiff ordinary differential equations (ODEs)."
+    },
+    {
+      "front": "How does EFLA's stability compare to DeltaNet in high-interference environments?",
+      "back": "EFLA maintains significantly higher accuracy due to its exact integration mechanism."
+    },
+    {
+      "front": "What does the term 'arithmetic intensity' refer to in hardware-efficient model design?",
+      "back": "The ratio of total floating-point operations to the total memory traffic required."
+    },
+    {
+      "front": "In the Mamba-3 MIMO variant, what does the rank $r$ represent?",
+      "back": "The number of inputs and outputs processed simultaneously in the state update."
+    },
+    {
+      "front": "Mamba-3's complex SSM is equivalent to a real SSM with _____ rotations.",
+      "back": "Data-dependent"
+    },
+    {
+      "front": "What is the 'reversal curse' in the context of large language models?",
+      "back": "A basic generalisation failure where Transformers struggle to learn bidirectional relationships."
+    },
+    {
+      "front": "What is 'State-Passing' (SP) in the context of hybrid Mamba-Transformer models?",
+      "back": "An intervention used during post-training to enable better length extrapolation in long-context tasks."
+    },
+    {
+      "front": "How does EFLA derive its exact solution for input injection?",
+      "back": "By integrating the matrix exponential transition operator over the time step."
+    },
+    {
+      "front": "What is the 'vanishing update' problem in EFLA?",
+      "back": "The dampening of parameter updates for high-confidence features where the key norm is large."
+    },
+    {
+      "front": "In Mamba-3, what does a higher MIMO rank $r$ do to the decode kernel performance?",
+      "back": "It increases decoding FLOPs with minimal increase in wall-clock latency."
+    },
+    {
+      "front": "What is the intended purpose of the $B$ and $C$ bias parameterization in Mamba-3?",
+      "back": "To enable the model to capture Linear Time-Invariant components and improve downstream performance."
+    },
+    {
+      "front": "The EFLA update rule maintains _____ time complexity while capturing exact continuous-time dynamics.",
+      "back": "Linear"
+    },
+    {
+      "front": "Which DSL was used to implement the optimized Mamba-3 decode kernels?",
+      "back": "CuTe DSL."
+    },
+    {
+      "front": "Why is the Mamba-3 MIMO model considered Pareto-optimal for state usage?",
+      "back": "It provides superior performance across various state sizes compared to Mamba-2 and SISO Mamba-3."
+    },
+    {
+      "front": "What property of $A_t$ in EFLA allows the Taylor series of the matrix exponential to collapse?",
+      "back": "The rank-1 structure."
+    },
+    {
+      "front": "What is 'stiff dynamics' in the context of ODEs and linear attention?",
+      "back": "Dynamics where numerical solvers require extremely small steps to remain stable, often leading to instability in low-order methods like Euler."
+    },
+    {
+      "front": "How does EFLA handle the 'interference over long contexts' seen in basic linear attention?",
+      "back": "By introducing an exact saturation mechanism that effectively manages memory erasure."
+    },
+    {
+      "front": "Mamba-3's training protocol used _____ tokens to ensure fair cross-model comparison.",
+      "back": "100B"
+    },
+    {
+      "front": "What is the 'selectivity' feature in State Space Models like Mamba?",
+      "back": "Making the state transitions dependent on the current input token."
+    },
+    {
+      "front": "In EFLA, what is the 'input forcing term' $b_t$ defined as?",
+      "back": "$k_t v_t^T$."
+    },
+    {
+      "front": "What is the 'WY representation' used for in EFLA chunkwise parallelism?",
+      "back": "Representing products of Householder-like matrices for hardware-efficient parallel scans."
+    },
+    {
+      "front": "How does Mamba-3 achieve gains in 'state-tracking' on synthetic tasks?",
+      "back": "Through complex-valued state updates that allow for rotational dynamics."
+    },
+    {
+      "front": "Term: Arithmetic Intensity",
+      "back": "Definition: A measure of operations per byte of memory access; higher intensity helps overcome memory-bandwidth bottlenecks."
+    },
+    {
+      "front": "In EFLA, what activation function is replaced to create the 'Loose $\\beta$' variant?",
+      "back": "The Sigmoid function is replaced with Softplus to relax the upper-bound on decay."
+    },
+    {
+      "front": "What is the global error order for the trapezoidal rule under specific regularity conditions?",
+      "back": "Second-order ($O(\\Delta_t^2)$)."
+    },
+    {
+      "front": "Why is the MIMO formulation 'implementation-friendly'?",
+      "back": "It relies on fast matrix-matrix multiplications."
+    },
+    {
+      "front": "How does Mamba-3's prefill latency compare to Mamba-2?",
+      "back": "They are nearly identical, confirming that Mamba-3's additions do not introduce significant forward-pass overhead."
+    },
+    {
+      "front": "What is the 'Stability-Responsiveness Trade-off' mentioned in the EFLA paper?",
+      "back": "The balance between being robust against gradient outliers (stability) and maintaining fast optimization (responsiveness)."
+    },
+    {
+      "front": "In the context of the delta rule, what does the learning rate $\\beta_t$ represent?",
+      "back": "The integration step size for the continuous-time dynamical system."
+    },
+    {
+      "front": "What does the 'Aha!' moment derivation in EFLA prove about the matrix exponential $e^{-\\beta_t A_t}$?",
+      "back": "It can be simplified to $I - \\frac{1 - e^{-\\beta_t \\lambda_t}}{\\lambda_t} A_t$."
+    },
+    {
+      "front": "What is the 'needle-in-a-haystack' task used for?",
+      "back": "Evaluating a model's ability to retrieve a specific piece of information from a long context."
+    },
+    {
+      "front": "Mamba-3's hybrid configuration interleaves self-attention blocks with Mamba-3 blocks in a repeated _____ pattern.",
+      "back": "Interleaved"
+    },
+    {
+      "front": "EFLA consistently outperforms DeltaNet on LAMBADA, which evaluates final word prediction based on _____ context.",
+      "back": "Broad"
+    },
+    {
+      "front": "What is the purpose of the 'expm1' function in EFLA's implementation?",
+      "back": "To preserve numerical precision when computing $1 - e^{-x}$ for very small exponents."
+    },
+    {
+      "front": "What is the relationship between Linear Transformers and Performer models?",
+      "back": "Both approximate softmax attention by replacing the kernel with a feature map for linear scaling."
+    },
+    {
+      "front": "In Mamba-3, the $BC$ bias parameters are trainable and _____ independent.",
+      "back": "Data"
+    },
+    {
+      "front": "What is the 'vanishing update' problem in EFLA fine-grained optimization?",
+      "back": "Exponential suppression of gradient signals for high-confidence features."
+    },
+    {
+      "front": "Why is 'FlashDecoding' mentioned in the comparison of Mamba-3 efficiency?",
+      "back": "It represents a production-grade Transformer inference optimization used as a baseline for speed comparisons."
+    },
+    {
+      "front": "What is the 'Pareto-frontier' in the context of Mamba-3?",
+      "back": "The optimal trade-off curve between model performance and inference compute/memory budget."
+    },
+    {
+      "front": "The EFLA update rule contracts the component of memory state $S_{t-1}$ aligned with $k_t$ by a factor of _____.",
+      "back": "$e^{-\\beta_t \\lambda_t}$"
+    },
+    {
+      "front": "What regularity condition is typically required for second-order convergence in trapezoidal schemes?",
+      "back": "Lipschitz continuity."
+    },
+    {
+      "front": "In Mamba-3, complex dynamics are implemented at only the computational cost of _____.",
+      "back": "RoPE (Rotary Positional Embedding)"
+    }
+  ]
+}

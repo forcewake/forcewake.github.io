@@ -1,0 +1,265 @@
+{
+  "title": "Mamba Quiz",
+  "questions": [
+    {
+      "question": "Mamba-3 introduces methodological improvements over Mamba-2. Which discretization scheme does Mamba-3 employ to improve recurrence expressivity and approximation quality?",
+      "answerOptions": [
+        {
+          "text": "Generalized Trapezoidal Discretization",
+          "isCorrect": true,
+          "rationale": "Mamba-3 uses this second-order accurate recurrence to generalize and improve upon the first-order Euler rule used in its predecessor."
+        },
+        {
+          "text": "First-order Explicit Euler Discretization",
+          "isCorrect": false,
+          "rationale": "This scheme is the baseline used in Mamba-2 and DeltaNet, which Mamba-3 seeks to improve due to its higher approximation errors."
+        },
+        {
+          "text": "Fourth-order Runge-Kutta (RK-4)",
+          "isCorrect": false,
+          "rationale": "While highly accurate, RK-4 is computationally expensive for standard sequence modeling and is not the primary mechanism proposed for Mamba-3."
+        },
+        {
+          "text": "Bilinear Transform using Zero-Order Hold",
+          "isCorrect": false,
+          "rationale": "The Bilinear transform is often associated with S4 models for LTI dynamics, but Mamba-3 specifically focuses on a trapezoidal formulation for its selective state update."
+        }
+      ],
+      "hint": "Consider the mathematical rule that provides a second-order approximation of an integral by treating the area as a specific four-sided shape."
+    },
+    {
+      "question": "In the context of Mamba-3's complex-valued dynamics, how are these implemented to maintain computational efficiency during inference?",
+      "answerOptions": [
+        {
+          "text": "Through an equivalence to data-dependent Rotary Position Embeddings (RoPE)",
+          "isCorrect": true,
+          "rationale": "The authors prove that complex-valued SSMs reduce to real-valued SSMs using data-dependent rotations on the $B$ and $C$ projections."
+        },
+        {
+          "text": "By using Fast Fourier Transforms (FFT) for state updates",
+          "isCorrect": false,
+          "rationale": "FFTs are used in non-selective LTI models like S4, but Mamba-3's selective updates rely on recurrence and efficient rotations."
+        },
+        {
+          "text": "By doubling the state dimension $d_{state}$ to handle imaginary components",
+          "isCorrect": false,
+          "rationale": "While one could represent complex numbers this way, Mamba-3 uses the 'RoPE trick' to avoid the overhead of full complex arithmetic."
+        },
+        {
+          "text": "Via a static sine-cosine positional encoding applied to the input",
+          "isCorrect": false,
+          "rationale": "Static encodings lack the data-dependency required by Mamba-3's complex-valued formulation to enable stronger state tracking."
+        }
+      ],
+      "hint": "Think about a popular technique used in Transformers to inject positional information through rotations."
+    },
+    {
+      "question": "What is the primary practical motivation for the Multi-Input Multi-Output (MIMO) formulation in Mamba-3?",
+      "answerOptions": [
+        {
+          "text": "To increase arithmetic intensity and mitigate memory-bound decoding",
+          "isCorrect": true,
+          "rationale": "By replacing vector outer products with matrix-matrix updates, MIMO increases the ratio of compute to memory IO during the inference bottleneck."
+        },
+        {
+          "text": "To reduce the number of parameters in the mixer layer",
+          "isCorrect": false,
+          "rationale": "MIMO actually maintains or slightly increases parameter counts to facilitate higher-rank updates."
+        },
+        {
+          "text": "To enable faster training convergence via global convolutions",
+          "isCorrect": false,
+          "rationale": "MIMO is specifically an 'inference-first' improvement; training is already compute-bound, so MIMO can actually increase training costs."
+        },
+        {
+          "text": "To decrease the size of the recurrent state $d_{state}$",
+          "isCorrect": false,
+          "rationale": "The goal of MIMO is to use the existing state more efficiently through higher-rank updates rather than shrinking it."
+        }
+      ],
+      "hint": "Focus on how the model manages the trade-off between memory access and mathematical operations on modern hardware."
+    },
+    {
+      "question": "Error-Free Linear Attention (EFLA) addresses numerical instability by solving the underlying ODE exactly. Which mathematical property of the dynamics matrix $A_t = k_t k_t^\\top$ enables this computation in linear time?",
+      "answerOptions": [
+        {
+          "text": "The rank-1 structure of the matrix",
+          "isCorrect": true,
+          "rationale": "The rank-1 property allows the Taylor series of the matrix exponential to collapse into a computable closed form using the eigenvalue $\\lambda_t = k_t^\\top k_t$."
+        },
+        {
+          "text": "The skew-symmetry of the key projections",
+          "isCorrect": false,
+          "rationale": "Dynamics matrices in this context are typically symmetric or related to outer products, not skew-symmetric."
+        },
+        {
+          "text": "The sparsity of the associative memory state",
+          "isCorrect": false,
+          "rationale": "EFLA operates on dense recurrent states; its efficiency comes from the structure of the update operator, not state sparsity."
+        },
+        {
+          "text": "The orthogonality of the value matrix",
+          "isCorrect": false,
+          "rationale": "Orthogonality is not a requirement for the EFLA formulation; the key lies in the rank of the $A_t$ matrix derived from keys."
+        }
+      ],
+      "hint": "Identify the property of an outer product of two vectors that simplifies complex matrix operations like exponentials."
+    },
+    {
+      "question": "According to the EFLA research, what acts as the 'dynamic gate' regulating the trade-off between memory forgetting and retention?",
+      "answerOptions": [
+        {
+          "text": "The squared norm of the key vector $||k_t||^2$",
+          "isCorrect": true,
+          "rationale": "The key norm acts as the single non-zero eigenvalue $\\lambda_t$, where larger norms lead to faster exponential decay of historical information."
+        },
+        {
+          "text": "The learning rate $\\beta_t$ of the AdamW optimiser",
+          "isCorrect": false,
+          "rationale": "While the learning rate affects weight updates, the dynamic gating referred to in the memory mechanism is a function of the input data itself."
+        },
+        {
+          "text": "The softmax temperature applied to the queries",
+          "isCorrect": false,
+          "rationale": "EFLA is a linear attention mechanism that seeks to avoid the explicit softmax operation and its associated quadratic costs."
+        },
+        {
+          "text": "The dropout probability $p$ applied to input tokens",
+          "isCorrect": false,
+          "rationale": "Dropout is used to test robustness in experiments, but it is not the principled mechanism used for gating in the EFLA update rule."
+        }
+      ],
+      "hint": "Look for a value derived from the key signal that determines how 'stiff' the dynamics of the memory state are."
+    },
+    {
+      "question": "Experiments with Mamba-3 hybrid architectures (5:1 SSM to Attention ratio) showed significant improvements in which area compared to pure SSMs?",
+      "answerOptions": [
+        {
+          "text": "Real-world retrieval tasks (e.g., SWDE and FDA)",
+          "isCorrect": true,
+          "rationale": "Hybrids alleviate the finite-state bottleneck of pure SSMs, allowing the model to outperform even Transformer baselines on information extraction."
+        },
+        {
+          "text": "Arithmetic operations on small integers",
+          "isCorrect": false,
+          "rationale": "Pure Mamba-3 already achieves near 100% accuracy on many state-tracking and arithmetic tasks; hybrids are primarily for long-context retrieval."
+        },
+        {
+          "text": "Total number of parameters required for a fixed accuracy",
+          "isCorrect": false,
+          "rationale": "Hybrids may require similar or more parameters; their advantage is in specific capabilities like retrieval rather than raw parameter efficiency."
+        },
+        {
+          "text": "Hardware-level decode latency on NVIDIA H100 GPUs",
+          "isCorrect": false,
+          "rationale": "Attention layers introduce $O(L)$ memory overhead, which generally makes hybrids slightly slower or more memory-intensive than pure linear models during decoding."
+        }
+      ],
+      "hint": "Pure recurrent models often struggle with 'needle-in-a-haystack' scenarios compared to Transformers."
+    },
+    {
+      "question": "In Mamba-3, what role does the 'BC bias' play regarding the model's architecture?",
+      "answerOptions": [
+        {
+          "text": "It provides an implicit LTI component that makes the short convolution layer redundant",
+          "isCorrect": true,
+          "rationale": "By adding a learned offset to the projections, the model can run data-dependent and time-invariant dynamics simultaneously, capturing local info without a separate conv layer."
+        },
+        {
+          "text": "It serves as a normalisation layer for the queries and keys",
+          "isCorrect": false,
+          "rationale": "Mamba-3 uses a separate QK-style normalisation; the BC bias is specifically a trainable offset for the $B$ and $C$ matrices."
+        },
+        {
+          "text": "It ensures that the eigenvalues of the transition matrix are exactly $0.5$",
+          "isCorrect": false,
+          "rationale": "The BC bias is a data-independent parameter used for expressivity, not a constraint on the discretization's stability parameters."
+        },
+        {
+          "text": "It acts as a safety guardrail against universal jailbreak attacks",
+          "isCorrect": false,
+          "rationale": "While 'GAVEL' and 'Constitutional Classifiers++' are mentioned in the ICLR papers list for safety, the BC bias is a structural modeling component."
+        }
+      ],
+      "hint": "Think about how the authors justified removing a standard 1D-convolutional component found in Mamba-1 and Mamba-2."
+    },
+    {
+      "question": "Deployment analysis of Mamba-3 suggests that the 'tipping point' between memory-bound and compute-bound kernels for a MIMO rank $r$ on an NVIDIA H100 occurs when $r$ is approximately:",
+      "answerOptions": [
+        {
+          "text": "$18$ (for fp32 data)",
+          "isCorrect": true,
+          "rationale": "Based on the ops-to-byte ratio of the H100, the arithmetic intensity $\\sim r$ becomes compute-bound when it matches the hardware's 18 fp32 ops per byte."
+        },
+        {
+          "text": "$4$ (the default rank used)",
+          "isCorrect": false,
+          "rationale": "Rank 4 was chosen as a reasonable compute-constrained default, but the kernel remains highly memory-bound at this level."
+        },
+        {
+          "text": "$128$ (the standard state size)",
+          "isCorrect": false,
+          "rationale": "A rank of 128 would be extremely compute-intensive and likely far beyond the efficiency gains intended for the MIMO formulation."
+        },
+        {
+          "text": "$2048$ (the model dimension)",
+          "isCorrect": false,
+          "rationale": "The model dimension $d$ is independent of the MIMO rank $r$, which governs the internal SSM update rank."
+        }
+      ],
+      "hint": "This value relates to the hardware's specific ratio of TFLOPS to DRAM bandwidth."
+    },
+    {
+      "question": "As the key norm $||k_t||^2$ approaches zero, the EFLA update rule asymptotically recovers which classical model?",
+      "answerOptions": [
+        {
+          "text": "The Delta Rule (DeltaNet)",
+          "isCorrect": true,
+          "rationale": "EFLA can be viewed as a higher-order generalization of the delta rule; when the dynamics are non-stiff (small key norm), the Taylor expansion recovers the first-order update."
+        },
+        {
+          "text": "Softmax Attention (Transformer)",
+          "isCorrect": false,
+          "rationale": "EFLA is fundamentally a linear-time recurrent mechanism, not a quadratic-time pairwise attention mechanism."
+        },
+        {
+          "text": "Mamba-2 (SISO)",
+          "isCorrect": false,
+          "rationale": "While related, Mamba-2 uses different discretization and selection logic; EFLA is specifically a principled solution for the delta-rule's ODE."
+        },
+        {
+          "text": "Linear Transformer with Feature Maps",
+          "isCorrect": false,
+          "rationale": "Linear Transformers typically lack the 'erasing' or 'delta' mechanism that EFLA's ODE solution explicitly models."
+        }
+      ],
+      "hint": "Look for the first-order integration method that EFLA improves upon by providing an exact solution."
+    },
+    {
+      "question": "Which trade-off is most characteristic of switching from a SISO to a MIMO Mamba-3 model during training and inference?",
+      "answerOptions": [
+        {
+          "text": "MIMO improves modeling performance and decoding efficiency but increases training compute costs",
+          "isCorrect": true,
+          "rationale": "MIMO utilizes hardware parallelism better during memory-bound decoding, but since training is compute-bound, the extra FLOPs increase training time."
+        },
+        {
+          "text": "MIMO reduces memory usage in training but slows down token generation",
+          "isCorrect": false,
+          "rationale": "MIMO's primary purpose is to *speed up* or maintain token generation speed by being more hardware-efficient, though it increases training compute."
+        },
+        {
+          "text": "MIMO requires a much larger recurrent state to achieve the same accuracy as SISO",
+          "isCorrect": false,
+          "rationale": "The authors found that MIMO outperforms SISO at the *same* state size across all evaluated scales."
+        },
+        {
+          "text": "MIMO is only compatible with fp32 precision, while SISO supports bfloat16",
+          "isCorrect": false,
+          "rationale": "Both variants are compatible with modern mixed-precision training and inference; the difference is in arithmetic intensity."
+        }
+      ],
+      "hint": "Recall the discussion on why SISO was used for the main Language Modeling results despite MIMO's Pareto-optimality."
+    }
+  ]
+}

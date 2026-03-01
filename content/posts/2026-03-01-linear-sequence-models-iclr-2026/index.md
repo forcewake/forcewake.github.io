@@ -17,6 +17,7 @@ tags:
 - transformers
 - sequence-modeling
 comments: true
+math: true
 cover:
   image: "infographic.jpg"
   relative: true
@@ -26,10 +27,6 @@ Params:
   TocOpen: true
 ---
 
-# The Linear Revolution at ICLR 2026: Mamba-3, EFLA, and the End of the Quadratic Bottleneck
-
-![Infographic: Mamba-3, EFLA, and the linear-time shift at ICLR 2026](infographic.jpg)
-
 ## Audio Version
 
 {{< audio src="audio-brief.m4a" type="audio/mp4" preload="none" >}}
@@ -38,18 +35,18 @@ Params:
 [Download full deep-dive audio](audio-overview.m4a)
 
 ### 1. Introduction: From Rio to the Future of Efficiency
-The Fourteenth International Conference on Learning Representations (ICLR 2026) in Rio de Janeiro has solidified a paradigm shift that many of us in the AI architecture space have long anticipated: the transition from "approximate" efficiency to "exact" sub-quadratic modeling. For years, the industry accepted the quadratic compute and linear memory bottlenecks of standard Transformers as an unavoidable tax on quality. Rio 2026 has definitively challenged this notion. [S4][S5]
+The Fourteenth International Conference on Learning Representations (ICLR 2026) in Rio de Janeiro has solidified a paradigm shift that many of us in the AI architecture space have long anticipated: the transition from "approximate" efficiency to "exact" sub-quadratic modeling. For years, the industry accepted the quadratic compute and linear memory bottlenecks of standard Transformers as an unavoidable tax on quality. Rio 2026 has definitively challenged this notion. [S4] [S5]
 
-The emergent theme of the conference is an "inference-first" design philosophy. We are seeing a move away from traditional low-order approximations—which often fail during long-context reasoning or under high-energy input—toward architectures like **Mamba-3** and **Error-Free Linear Attention (EFLA)**. By leveraging exact mathematical solutions to continuous-time dynamics, these models are effectively dismantling the quadratic bottleneck while matching or exceeding the reasoning fidelity of the Transformer. [S1][S2][S3]
+The emergent theme of the conference is an "inference-first" design philosophy. We are seeing a move away from traditional low-order approximations—which often fail during long-context reasoning or under high-energy input—toward architectures like **Mamba-3** and **Error-Free Linear Attention (EFLA)**. By leveraging exact mathematical solutions to continuous-time dynamics, these models are effectively dismantling the quadratic bottleneck while matching or exceeding the reasoning fidelity of the Transformer. [S1] [S2] [S3]
 
 ### 2. Mamba-3: The Inference-First Evolution
 Mamba-3 represents a deconstruction of the state-space bottleneck by returning to the first principles of control theory. It is no longer enough to merely scale; we must optimize for the Pareto-frontier of performance and inference budget. Mamba-3 achieves this through three foundational methodological shifts:
 
-1.  **Generalized Trapezoidal Discretization**: Moving beyond the first-order Euler-style rules used in Mamba-2, Mamba-3 implements a second-order accurate recurrence. This reduces sequence approximation error and significantly improves the expressivity of the dynamics. [S1][S2]
-2.  **Complex-Valued Dynamics (The "RoPE Trick")**: Mamba-3 introduces complex state updates that are mathematically equivalent to data-dependent, Rotary Positional Embedding (RoPE)-like rotations. Crucially, this is implemented with high efficiency by maintaining a **cumulative sum of rotation angles** during the parallel scan, transitioning from a product of rotation matrices to a computationally lightweight sum of angles. [S1][S2]
-3.  **MIMO (Multi-Input Multi-Output) Update**: To mitigate memory-bound decoding, Mamba-3 utilizes matrix-matrix formulations. This increases arithmetic intensity without bloating the hidden state. Architecturally, we have identified specific "tipping points" where the kernel shifts from memory-bound to compute-bound decoding: at a rank $r \approx 18$ for FP32 on H100 hardware, and $r \approx 150$ when utilizing tensor cores with BF16. [S1][S2]
+1.  **Generalized Trapezoidal Discretization**: Moving beyond the first-order Euler-style rules used in Mamba-2, Mamba-3 implements a second-order accurate recurrence. This reduces sequence approximation error and significantly improves the expressivity of the dynamics. [S1] [S2]
+2.  **Complex-Valued Dynamics (The "RoPE Trick")**: Mamba-3 introduces complex state updates that are mathematically equivalent to data-dependent, Rotary Positional Embedding (RoPE)-like rotations. Crucially, this is implemented with high efficiency by maintaining a **cumulative sum of rotation angles** during the parallel scan, transitioning from a product of rotation matrices to a computationally lightweight sum of angles. [S1] [S2]
+3.  **MIMO (Multi-Input Multi-Output) Update**: To mitigate memory-bound decoding, Mamba-3 utilizes matrix-matrix formulations. This increases arithmetic intensity without bloating the hidden state. Architecturally, we have identified specific "tipping points" where the kernel shifts from memory-bound to compute-bound decoding: at a rank $r \approx 18$ for FP32 on H100 hardware, and $r \approx 150$ when utilizing tensor cores with BF16. [S1] [S2]
 
-Perhaps the most significant architectural simplification in Mamba-3 is the **integration of BC Bias**. By adding a learned offset to the data-dependent B and C projections, the model can effectively recover Linear Time-Invariant (LTI) performance. This breakthrough makes the traditional short convolution layer—long a staple of SSMs—entirely redundant, streamlining the pipeline without losing local signal processing capability. [S1][S2]
+Perhaps the most significant architectural simplification in Mamba-3 is the **integration of BC Bias**. By adding a learned offset to the data-dependent B and C projections, the model can effectively recover Linear Time-Invariant (LTI) performance. This breakthrough makes the traditional short convolution layer—long a staple of SSMs—entirely redundant, streamlining the pipeline without losing local signal processing capability. [S1] [S2]
 
 ### 3. The "Free Lunch": Error-Free Linear Attention (EFLA)
 A standout contribution from researchers at Nanyang Technological University and Fudan University, **Error-Free Linear Attention (EFLA)**, identifies a critical flaw in current linear attention models like DeltaNet. These models treat continuous-time dynamics as a numerical integration problem solved via first-order Euler discretization. In high-energy or "stiff" dynamic scenarios, Euler methods suffer from catastrophic truncation errors and instability. [S3]
@@ -61,7 +58,7 @@ The "Aha! Moment" for EFLA lies in the **rank-1 structure** of the dynamics matr
 Unlike Euler-based methods that merely damp errors, EFLA eliminates them. The result is an exact saturation mechanism ($1 - e^{-x}/x$) that ensures the transition matrix eigenvalues are naturally bounded within (0, 1], guaranteeing numerical stability regardless of sequence length. [S3]
 
 ### 4. Comparative Analysis: Performance and Robustness
-Benchmarks from ICLR 2026 demonstrate that these sub-quadratic models are now competitive with production-grade engines like vLLM and FlashDecoding. [S1][S2][S3]
+Benchmarks from ICLR 2026 demonstrate that these sub-quadratic models are now competitive with production-grade engines like vLLM and FlashDecoding. [S1] [S2] [S3]
 
 | Model | Avg. LM Accuracy | Retrieval (SWDE) | Retrieval (FDA) | Scale |
 | :--- | :--- | :--- | :--- | :--- |
@@ -113,10 +110,12 @@ Rio has shown us that the next generation of scalable, high-fidelity AI agents w
 
 ## NotebookLM Study Assets
 
-- [Quiz (Markdown)](quiz.md) - editable text version.
-- [Quiz (HTML)](quiz.html) - browser-friendly version.
-- [Flashcards (Markdown)](flashcards.md) - editable text deck.
-- [Flashcards (HTML)](flashcards.html) - browser-friendly deck.
+- [Quiz (Markdown)](/study/the-linear-revolution-at-iclr-2026/quiz.md) - editable text version.
+- [Quiz (HTML)](/study/the-linear-revolution-at-iclr-2026/quiz.html) - browser-friendly version.
+- [Quiz (JSON)](quiz.json) - machine-readable quiz data.
+- [Flashcards (Markdown)](/study/the-linear-revolution-at-iclr-2026/flashcards.md) - editable text deck.
+- [Flashcards (HTML)](/study/the-linear-revolution-at-iclr-2026/flashcards.html) - browser-friendly deck.
+- [Flashcards (JSON)](flashcards.json) - machine-readable flashcard deck.
 - [Mind Map (JSON)](mind-map.json) - structured graph for visualization tools.
 
 ## Source Mapping
