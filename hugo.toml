@@ -35,9 +35,10 @@ copyright = "© Copyright 2026"
 summaryLength = 20
 
 [params]
+  # Site metadata
+  description = "Personal blog about software development, DevOps, cloud technologies, AI/ML, and developer tooling by Pavel Nasovich"
   subtitle = "The Moderately Enthusiastic Programmer"
   featherIconsCDN = true
-  favicon = "/favicon.ico"
   mode = "auto" # "dark", "auto", "light"
 
   # PaperMod features
@@ -50,6 +51,7 @@ summaryLength = 20
   UseHugoToc = true
   ShowToc = true
   TocOpen = false
+  ShowWordCount = true
 
   # Enable site search
   enableSearch = true
@@ -68,6 +70,33 @@ summaryLength = 20
     name = "Pavel Nasovich"
     email = ""
     link = "https://forcewake.me/"
+
+  # Favicon variants (create these files in static/)
+  [params.assets]
+    favicon = "/favicon.ico"
+    favicon16x16 = "/favicon-16x16.png"
+    favicon32x32 = "/favicon-32x32.png"
+    apple_touch_icon = "/apple-touch-icon.png"
+    safari_pinned_tab = "/safari-pinned-tab.svg"
+
+  # Theme colors for browsers
+  [params.theme-color]
+    light = "#ffffff"
+    dark = "#1a1a1a"
+
+  # Schema.org settings
+  [params.schema]
+    publisherType = "Person"
+    sameAs = [
+      "https://github.com/forcewake",
+      "https://www.linkedin.com/in/nasovich/",
+      "https://twitter.com/forcewake"
+    ]
+
+  # Search verification (add your verification codes)
+  [params.analytics]
+    googleSiteVerification = ""
+    bingSiteVerification = ""
 
   # Giscus comments (GitHub Discussions-based, privacy-friendly)
   [params.giscus]
@@ -164,3 +193,14 @@ summaryLength = 20
 [taxonomies]
   tag = "tags"
   category = "categories"
+
+# Custom output formats
+[outputFormats]
+  [outputFormats.llms]
+    baseName = "llms"
+    isPlainText = true
+    mediaType = "text/plain"
+    notAlternative = true
+
+[outputs]
+  home = ["HTML", "RSS", "llms"]

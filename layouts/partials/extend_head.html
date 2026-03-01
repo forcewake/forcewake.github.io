@@ -1,3 +1,21 @@
+{{/* Preconnect to external domains for performance */}}
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://giscus.app" crossorigin>
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+<link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="dns-prefetch" href="https://giscus.app">
+
+{{/* PWA Manifest */}}
+<link rel="manifest" href="/manifest.json">
+
+{{/* Theme colors for browsers */}}
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
+
+{{/* Color scheme meta tag */}}
+<meta name="color-scheme" content="light dark">
+
 {{/* JSON-LD Structured Data for SEO */}}
 {{ if .IsPage }}
 {{ $author := .Site.Params.author.name }}
@@ -38,25 +56,6 @@
 }
 </script>
 {{ end }}
-
-{{/* Open Graph / Facebook */}}
-<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
-<meta property="og:url" content="{{ .Permalink }}">
-<meta property="og:title" content="{{ .Title }}">
-<meta property="og:description" content="{{ .Description | default .Summary | plainify | truncate 160 }}">
-<meta property="og:site_name" content="{{ .Site.Title }}">
-{{ if .Params.cover }}{{ with .Params.cover.image }}
-<meta property="og:image" content="{{ $.Site.BaseURL }}{{ . }}">
-{{ end }}{{ end }}
-
-{{/* Twitter / X */}}
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@forcewake">
-<meta name="twitter:title" content="{{ .Title }}">
-<meta name="twitter:description" content="{{ .Description | default .Summary | plainify | truncate 160 }}">
-{{ if .Params.cover }}{{ with .Params.cover.image }}
-<meta name="twitter:image" content="{{ $.Site.BaseURL }}{{ . }}">
-{{ end }}{{ end }}
 
 {{/* KaTeX math rendering (enable per page with `math: true` in front matter) */}}
 {{- if or .Params.math .Site.Params.math }}

@@ -1,0 +1,65 @@
+/* Print styles */
+@media print {
+  /* Hide navigation and interactive elements */
+  .header,
+  .footer,
+  .post-nav,
+  .share-buttons,
+  .giscus,
+  #theme-toggle,
+  .skip-link,
+  .toc,
+  .post-meta > span:not(:first-child),
+  #comments {
+    display: none !important;
+  }
+
+  /* Reset colors for printing */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  /* Ensure links are visible */
+  a {
+    color: black !important;
+    text-decoration: underline;
+  }
+
+  /* Show link URLs for external links */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  /* Page breaks */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  img, table, figure, pre, blockquote {
+    page-break-inside: avoid;
+  }
+
+  /* Ensure code blocks are readable */
+  pre, code {
+    background: #f5f5f5 !important;
+    border: 1px solid #ddd;
+    font-size: 10pt;
+  }
+
+  /* Tables */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid #333;
+    padding: 8px;
+  }
+}

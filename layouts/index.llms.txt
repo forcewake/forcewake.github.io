@@ -1,0 +1,26 @@
+# {{ .Site.Title }}
+
+> {{ .Site.Params.subtitle }} - A personal blog about software development, DevOps, cloud technologies, and AI by Pavel Nasovich.
+
+## About
+
+- [About Pavel Nasovich]({{ .Site.BaseURL }}about/): Software engineer passionate about .NET, cloud infrastructure, AI/ML, and developer tooling.
+
+## Blog Posts
+
+{{ range (where .Site.RegularPages "Section" "posts") }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Summary | plainify | htmlUnescape | truncate 150 }}
+{{ end }}
+## Optional
+
+### Social Profiles
+
+- [GitHub](https://github.com/forcewake)
+- [LinkedIn](https://www.linkedin.com/in/nasovich/)
+- [Twitter](https://twitter.com/forcewake)
+
+### More Resources
+
+- [RSS Feed]({{ .Site.BaseURL }}index.xml): Subscribe to new posts via RSS
+- [All Posts]({{ .Site.BaseURL }}posts/): Browse all blog posts
+- [Tags]({{ .Site.BaseURL }}tags/): Browse posts by topic
