@@ -1,0 +1,20 @@
+{{- $src := .Get "src" -}}
+{{- if not $src -}}
+  {{- errorf "audio shortcode: missing required param 'src'" -}}
+{{- end -}}
+
+{{- $type := .Get "type" | default "audio/mp4" -}}
+{{- $preload := .Get "preload" | default "none" -}}
+
+{{- $r := .Page.Resources.Get $src -}}
+{{- if not $r -}}
+  {{- $r = resources.Get $src -}}
+{{- end -}}
+{{- if not $r -}}
+  {{- errorf "audio shortcode: cannot find %q" $src -}}
+{{- end -}}
+
+<audio controls preload="{{ $preload }}">
+  <source src="{{ $r.RelPermalink }}" type="{{ $type }}">
+  Your browser does not support the audio element.
+</audio>

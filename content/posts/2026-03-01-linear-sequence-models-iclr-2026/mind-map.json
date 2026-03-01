@@ -1,0 +1,138 @@
+{
+  "name": "ICLR 2026 Conference",
+  "children": [
+    {
+      "name": "General Information",
+      "children": [
+        {
+          "name": "Location: Rio de Janeiro, Brazil"
+        },
+        {
+          "name": "Date: April 23, 2026"
+        },
+        {
+          "name": "Submission Deadline: Sept 25, 2025"
+        }
+      ]
+    },
+    {
+      "name": "Mamba-3 Paper",
+      "children": [
+        {
+          "name": "Inference-first perspective"
+        },
+        {
+          "name": "Methodological Improvements",
+          "children": [
+            {
+              "name": "Trapezoidal Discretization"
+            },
+            {
+              "name": "Complex-Valued Dynamics (RoPE Equivalence)"
+            },
+            {
+              "name": "MIMO Formulation"
+            }
+          ]
+        },
+        {
+          "name": "Performance Results",
+          "children": [
+            {
+              "name": "Pareto-frontier for inference budget"
+            },
+            {
+              "name": "Gains in state-tracking tasks"
+            },
+            {
+              "name": "Hybrid models for retrieval"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "EFLA Paper",
+      "children": [
+        {
+          "name": "Error-Free Linear Attention"
+        },
+        {
+          "name": "Core Principles",
+          "children": [
+            {
+              "name": "Continuous-Time Dynamics"
+            },
+            {
+              "name": "Exact Closed-Form Solution"
+            },
+            {
+              "name": "Rank-1 Matrix Property"
+            }
+          ]
+        },
+        {
+          "name": "Benefits",
+          "children": [
+            {
+              "name": "Numerical Stability"
+            },
+            {
+              "name": "Linear-Time Complexity"
+            },
+            {
+              "name": "Robustness in Noisy Environments"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Other Research Themes",
+      "children": [
+        {
+          "name": "Benchmarks & Evaluation",
+          "children": [
+            {
+              "name": "CounselBench (Mental Health)"
+            },
+            {
+              "name": "AstaBench (Scientific Research)"
+            },
+            {
+              "name": "WebDevJudge (Web Development)"
+            }
+          ]
+        },
+        {
+          "name": "Datasets",
+          "children": [
+            {
+              "name": "Common Corpus (Ethical Data)"
+            },
+            {
+              "name": "MedAraBench (Arabic Medical QA)"
+            },
+            {
+              "name": "SpeakerVid-5M (Audio-Visual)"
+            }
+          ]
+        },
+        {
+          "name": "Model Optimization",
+          "children": [
+            {
+              "name": "Direct Preference Optimization (DPO)"
+            },
+            {
+              "name": "Neural Collapse (NC)"
+            },
+            {
+              "name": "Federated Learning"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
