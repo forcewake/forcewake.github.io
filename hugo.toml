@@ -3,8 +3,8 @@ languageCode = "en-us"
 title = "Pavel Nasovich's Blog"
 theme = "PaperMod"
 
-# Dynamic copyright year
-copyright = "© Copyright {{ now.Year }}"
+# Copyright (Hugo doesn't support template syntax here, updated manually)
+copyright = "© Copyright 2026"
 
 [pagination]
   disableAliases = false
