@@ -29,17 +29,15 @@ Params:
 
 ## Executive Summary
 
-The big story of early 2026 is not just "better models". It is platform consolidation plus operational maturity for agent systems. Microsoft Agent Framework (MAF) is positioned as the convergence point of AutoGen-style multi-agent orchestration and Semantic Kernel-style enterprise integration, with explicit production concerns around identity, durability, observability, and governance. [S1] [S2] [S3]
-
-This article distills the `notebook/b266645d-d2a8-40e1-b05b-7cf3dbf10467` research set into an implementation-first guide for engineering leaders planning real deployments.
+The big story of early 2026 is not just "better models". It is platform consolidation plus operational maturity for agent systems. Microsoft Agent Framework (MAF) is positioned as the convergence point of AutoGen-style multi-agent orchestration and Semantic Kernel-style enterprise integration, with explicit production concerns around identity, durability, observability, and governance. [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/) [S2](https://www.microsoft.com/en-us/research/blog/autogen-v0-4-reimagining-the-foundation-of-agentic-ai-for-scale-extensibility-and-robustness/) [S3](https://learn.microsoft.com/en-us/agent-framework/overview/)
 
 ## 1. Why This Matters in 2026
 
 Three shifts changed the decision criteria for AI-agent platforms:
 
-1. Teams moved from single-agent demos to multi-agent workflows that span multiple systems and approval points. [S4] [S5]
-2. Platform choice became an operational decision (identity, auditability, reliability), not only an SDK preference. [S6] [S7] [S8]
-3. Security teams started treating agents as a new attack surface, especially for indirect prompt injection and over-privileged tool execution. [S9] [S10]
+1. Teams moved from single-agent demos to multi-agent workflows that span multiple systems and approval points. [S4](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) [S5](https://learn.microsoft.com/en-us/agent-framework/workflows/orchestrations/)
+2. Platform choice became an operational decision (identity, auditability, reliability), not only an SDK preference. [S6](https://learn.microsoft.com/en-us/agent-framework/agents/observability) [S7](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/) [S8](https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-dec-2025-jan-2026/)
+3. Security teams started treating agents as a new attack surface, especially for indirect prompt injection and over-privileged tool execution. [S9](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/) [S10](https://www.microsoft.com/en-us/security/security-insider/emerging-trends/cyber-pulse-ai-security-report)
 
 ## 2. What Microsoft Agent Framework Actually Standardizes
 
@@ -49,11 +47,11 @@ MAF provides a common runtime model around three primitives:
 - `Threads/State`: managed conversational and workflow context.
 - `Workflows`: explicit orchestration graphs for deterministic and non-deterministic paths.
 
-In practice, this unifies what used to be split across AutoGen and Semantic Kernel and gives teams one migration target for production systems. [S1] [S2] [S3]
+In practice, this unifies what used to be split across AutoGen and Semantic Kernel and gives teams one migration target for production systems. [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/) [S2](https://www.microsoft.com/en-us/research/blog/autogen-v0-4-reimagining-the-foundation-of-agentic-ai-for-scale-extensibility-and-robustness/) [S3](https://learn.microsoft.com/en-us/agent-framework/overview/)
 
 ## 3. Orchestration Patterns You Should Use Intentionally
 
-Microsoft documentation and ecosystem examples converge on five pattern families. Picking the wrong one is a common source of latency, cost, and reliability issues. [S4] [S11]
+Microsoft documentation and ecosystem examples converge on five pattern families. Picking the wrong one is a common source of latency, cost, and reliability issues. [S4](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) [S11](https://learn.microsoft.com/en-us/agent-framework/workflows/)
 
 | Pattern | Best For | Main Advantage | Main Risk |
 | :--- | :--- | :--- | :--- |
@@ -65,7 +63,7 @@ Microsoft documentation and ecosystem examples converge on five pattern families
 
 ### Practical Rule
 
-Default to **sequential + bounded concurrency** for production-critical flows. Use group-chat and open-ended orchestrators only behind stricter termination and budget controls. [S4] [S11]
+Default to **sequential + bounded concurrency** for production-critical flows. Use group-chat and open-ended orchestrators only behind stricter termination and budget controls. [S4](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) [S11](https://learn.microsoft.com/en-us/agent-framework/workflows/)
 
 ## 4. Memory and Durability: Where Most Proofs-of-Concept Break
 
@@ -79,7 +77,7 @@ Using durable workflows (Azure Functions integration in MAF docs) changes the op
 - Long-running steps can pause and resume.
 - Human-in-the-loop approvals can wait hours or days without burning compute.
 
-This is fundamental for enterprise workflows that cross team boundaries and SLAs. [S12] [S13]
+This is fundamental for enterprise workflows that cross team boundaries and SLAs. [S12](https://learn.microsoft.com/en-us/agent-framework/integrations/azure-functions) [S13](https://learn.microsoft.com/en-us/agent-framework/workflows/human-in-the-loop)
 
 ### Long-Term Memory Strategy
 
@@ -89,11 +87,11 @@ Treat memory as tiered:
 - Summarized memory for cross-session continuity.
 - Profile memory for durable user/context preferences.
 
-Do not treat memory as a generic dump. Define retention, classification, and redaction policy before rollout. [S14] [S10]
+Do not treat memory as a generic dump. Define retention, classification, and redaction policy before rollout. [S14](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/concepts/what-is-memory?view=foundry) [S10](https://www.microsoft.com/en-us/security/security-insider/emerging-trends/cyber-pulse-ai-security-report)
 
 ## 5. Observability Must Be Designed Up Front
 
-MAF observability guidance centers on OpenTelemetry and end-to-end tracing into Azure monitoring surfaces. [S6] [S15] [S16]
+MAF observability guidance centers on OpenTelemetry and end-to-end tracing into Azure monitoring surfaces. [S6](https://learn.microsoft.com/en-us/agent-framework/agents/observability) [S15](https://learn.microsoft.com/en-us/azure/azure-monitor/app/agents-view) [S16](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk?view=foundry-classic)
 
 Minimum telemetry contract for each workflow run:
 
@@ -107,32 +105,32 @@ If you cannot reconstruct "who did what, when, and why" from telemetry, you do n
 
 ## 6. Security Posture: Agentic Systems Need Zero-Trust Controls
 
-Agent systems are dual-use. The same capability that accelerates internal automation can accelerate abuse if boundaries are weak. [S9] [S10]
+Agent systems are dual-use. The same capability that accelerates internal automation can accelerate abuse if boundaries are weak. [S9](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/) [S10](https://www.microsoft.com/en-us/security/security-insider/emerging-trends/cyber-pulse-ai-security-report)
 
 ![Zero-trust security controls for enterprise agent systems](security-posture.jpg)
 
 Core controls to make non-optional:
 
-- Identity propagation with least privilege (user or service scope, never blanket credentials). [S7]
+- Identity propagation with least privilege (user or service scope, never blanket credentials). [S7](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/)
 - Tool-authorization checks in middleware and policy layers, not only in prompts.
-- Prompt-shield and content safety controls for injection/unsafe instructions. [S9]
+- Prompt-shield and content safety controls for injection/unsafe instructions. [S9](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/)
 - Segmented tool networks and allowlists for high-impact actions.
 - Full audit trail for every external side effect.
 
 ### Anti-Pattern to Avoid
 
-Putting access rules only inside the system prompt is not security architecture. Enforce authorization outside the model path. [S8] [S17]
+Putting access rules only inside the system prompt is not security architecture. Enforce authorization outside the model path. [S7](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/) [S17](https://www.digitalapplied.com/blog/mcp-vs-langchain-vs-crewai-agent-framework-comparison)
 
 ## 7. Framework Trade-offs in 2026 (MAF vs LangGraph vs CrewAI)
 
 | Dimension | Microsoft Agent Framework | LangGraph | CrewAI |
 | :--- | :--- | :--- | :--- |
-| Enterprise governance | Strong native alignment with Microsoft identity, policy, and cloud controls [S1] [S7] | Usually custom-built per project [S18] | Simpler role model, fewer enterprise defaults [S18] |
-| Orchestration control | Strong built-in patterns and workflow model [S4] [S11] | Deep low-level graph/state control [S18] | Fast role-based team setup, less flexible for edge cases [S18] |
-| Observability | OpenTelemetry + Azure monitoring surfaces [S6] [S15] | Strong with LangSmith ecosystem [S18] | Adequate but can become opaque in complex flows [S18] |
-| Security model | Better default story for enterprise on Microsoft stack [S7] [S9] | Depends heavily on custom controls [S18] | Depends on deployment model and add-ons [S18] |
-| Lock-in profile | Reduced by MCP/OpenAPI/A2A integrations, but still Microsoft-centric [S1] [S19] | More model-agnostic, LangChain-centric abstractions [S18] | Flexible for quick starts, less standardized for governance [S18] |
-| Time-to-first-production | Fast for Azure/.NET/Python teams with existing Microsoft footprint [S1] [S3] | Slower initial ramp, stronger for custom graph experts [S18] | Very fast prototype velocity [S18] |
+| Enterprise governance | Strong native alignment with Microsoft identity, policy, and cloud controls [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/) [S7](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/) | Usually custom-built per project [S18](https://www.turing.com/resources/ai-agent-frameworks) | Simpler role model, fewer enterprise defaults [S18](https://www.turing.com/resources/ai-agent-frameworks) |
+| Orchestration control | Strong built-in patterns and workflow model [S4](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) [S11](https://learn.microsoft.com/en-us/agent-framework/workflows/) | Deep low-level graph/state control [S18](https://www.turing.com/resources/ai-agent-frameworks) | Fast role-based team setup, less flexible for edge cases [S18](https://www.turing.com/resources/ai-agent-frameworks) |
+| Observability | OpenTelemetry + Azure monitoring surfaces [S6](https://learn.microsoft.com/en-us/agent-framework/agents/observability) [S15](https://learn.microsoft.com/en-us/azure/azure-monitor/app/agents-view) | Strong with LangSmith ecosystem [S18](https://www.turing.com/resources/ai-agent-frameworks) | Adequate but can become opaque in complex flows [S18](https://www.turing.com/resources/ai-agent-frameworks) |
+| Security model | Better default story for enterprise on Microsoft stack [S7](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/) [S9](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/) | Depends heavily on custom controls [S18](https://www.turing.com/resources/ai-agent-frameworks) | Depends on deployment model and add-ons [S18](https://www.turing.com/resources/ai-agent-frameworks) |
+| Lock-in profile | Reduced by MCP/OpenAPI/A2A integrations, but still Microsoft-centric [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/) [S19](https://www.softwareseni.com/model-context-protocol-and-the-battle-for-ai-agent-standardisation-across-frameworks-and-platforms/) | More model-agnostic, LangChain-centric abstractions [S18](https://www.turing.com/resources/ai-agent-frameworks) | Flexible for quick starts, less standardized for governance [S18](https://www.turing.com/resources/ai-agent-frameworks) |
+| Time-to-first-production | Fast for Azure/.NET/Python teams with existing Microsoft footprint [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/) [S3](https://learn.microsoft.com/en-us/agent-framework/overview/) | Slower initial ramp, stronger for custom graph experts [S18](https://www.turing.com/resources/ai-agent-frameworks) | Very fast prototype velocity [S18](https://www.turing.com/resources/ai-agent-frameworks) |
 
 ## 8. 90-Day Enterprise Rollout Plan
 
@@ -163,7 +161,7 @@ Putting access rules only inside the system prompt is not security architecture.
 
 ## Conclusion
 
-Microsoft Agent Framework is not just another agent SDK. In 2026 it is best understood as a production operating model: workflow-first orchestration, cloud-native durability, standardized telemetry, and security controls aligned to enterprise governance. [S1] [S4] [S6] [S9]
+Microsoft Agent Framework is not just another agent SDK. In 2026 it is best understood as a production operating model: workflow-first orchestration, cloud-native durability, standardized telemetry, and security controls aligned to enterprise governance. [S1](https://devblogs.microsoft.com/foundry/microsoft-agent-framework-reaches-release-candidate/) [S4](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) [S6](https://learn.microsoft.com/en-us/agent-framework/agents/observability) [S9](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/)
 
 Adoption success depends less on model quality and more on system discipline. Teams that define clear orchestration boundaries, enforce policy out-of-band, and instrument every run will scale safely. Teams that skip those foundations will ship fragile automation with hidden risk.
 
@@ -176,7 +174,7 @@ Adoption success depends less on model quality and more on system discipline. Te
 - **S5**: [Workflow Orchestrations in Agent Framework](https://learn.microsoft.com/en-us/agent-framework/workflows/orchestrations/)
 - **S6**: [Observability in Agent Framework (Microsoft Learn)](https://learn.microsoft.com/en-us/agent-framework/agents/observability)
 - **S7**: [Agent Middleware (Microsoft Learn)](https://learn.microsoft.com/en-us/agent-framework/agents/middleware/)
-- **S8**: [MCP OAuth and Audit Discussion (Reddit)](https://www.reddit.com/r/AI_Agents/comments/1r8ia9e/mcp_is_going_remote_oauth_fast_what_are_you_doing/)
+- **S8**: [What's New in Microsoft Foundry (Dec 2025 & Jan 2026)](https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-dec-2025-jan-2026/)
 - **S9**: [A New Era of Agents, A New Era of Posture (Microsoft Security)](https://www.microsoft.com/en-us/security/blog/2026/01/21/new-era-of-agents-new-era-of-posture/)
 - **S10**: [Cyber Pulse: An AI Security Report (Microsoft)](https://www.microsoft.com/en-us/security/security-insider/emerging-trends/cyber-pulse-ai-security-report)
 - **S11**: [Microsoft Agent Framework Workflows](https://learn.microsoft.com/en-us/agent-framework/workflows/)
@@ -186,5 +184,6 @@ Adoption success depends less on model quality and more on system discipline. Te
 - **S15**: [Monitor AI Agents with Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/agents-view)
 - **S16**: [Trace and Observe AI Agents in Microsoft Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk?view=foundry-classic)
 - **S17**: [MCP vs LangChain vs CrewAI (DigitalApplied)](https://www.digitalapplied.com/blog/mcp-vs-langchain-vs-crewai-agent-framework-comparison)
-- **S18**: [The Great AI Agent Showdown of 2026 (Medium)](https://topuzas.medium.com/the-great-ai-agent-showdown-of-2026-openai-autogen-crewai-or-langgraph-7b27a176b2a1)
+- **S18**: [A Detailed Comparison of Top 6 AI Agent Frameworks in 2026 (Turing)](https://www.turing.com/resources/ai-agent-frameworks)
 - **S19**: [Model Context Protocol and Standardization Across Frameworks](https://www.softwareseni.com/model-context-protocol-and-the-battle-for-ai-agent-standardisation-across-frameworks-and-platforms/)
+

@@ -1,0 +1,26 @@
+/* Mermaid diagram styling */
+.mermaid-container {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: var(--theme-code-bg, #f6f8fa);
+}
+
+.mermaid-container pre.mermaid {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: inherit;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .mermaid-container {
+  background: var(--theme-code-bg, #1e1e1e);
+}
+
+/* Ensure mermaid svg is responsive */
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
