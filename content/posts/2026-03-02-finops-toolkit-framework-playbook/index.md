@@ -1,6 +1,6 @@
 ---
 title: "FinOps Toolkit Framework Playbook: Secure Hubs, AI Agents, and a 90-Day Execution Model"
-date: "2026-03-02T00:00:00Z"
+date: "2026-03-02T06:00:00Z"
 description: >
   A practical, source-backed FinOps implementation playbook built from opensource materials and refreshed with current Microsoft Learn + FinOps Foundation guidance: secure FinOps hubs architecture, export/ingestion mechanics, AI-assisted analysis, optimization automation, KPI queries, and an operational rollout model.
 categories:
